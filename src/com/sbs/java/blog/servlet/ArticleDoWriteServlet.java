@@ -27,6 +27,7 @@ public class ArticleDoWriteServlet extends HttpServlet {
 		try {
 			Class.forName(driverName);
 			connection = DriverManager.getConnection(url, user, password);
+			response.getWriter().append("연결되었습니다.");
 		} catch (SQLException e) {
 			System.err.printf("[SQL 예외] : %s\n", e.getMessage());
 		} catch (ClassNotFoundException e) {
