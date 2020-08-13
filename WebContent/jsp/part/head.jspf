@@ -34,7 +34,7 @@
 	<div class="mobile-top-bar visible-on-sm-down flex">
 		<a href="#" class="btn-toggle-mobile-side-bar flex flex-ai-c"> <i
 			class="fas fa-bars"></i> <i class="fas fa-times"></i>
-		</a> <a href="${pageContext.request.contextPath}/home/main"
+		</a> <a href="${pageContext.request.contextPath}/s/home/main"
 			class="logo absolute-center absolute-middle flex flex-ai-c"> <i
 			class="fas fa-award"></i>
 		</a>
@@ -42,9 +42,9 @@
 	<div class="mobile-side-bar flex flex-ai-c visible-on-sm-down">
 		<nav class="menu-box-1 flex-grow-1">
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/home/main" class="block">Home</a></li>
+				<li><a href="${pageContext.request.contextPath}/s/home/main" class="block">Home</a></li>
 				<li><a href="#" class="block">Articles</a></li>
-				<li><a href="${pageContext.request.contextPath}/home/aboutMe" class="block">AboutMe</a></li>
+				<li><a href="${pageContext.request.contextPath}/s/home/aboutMe" class="block">AboutMe</a></li>
 				<li>
 					<a href="#" class="block">SNS</a>
 					<ul>
@@ -56,14 +56,14 @@
 	</div>
 	<div class="top-bar visible-on-md-up">
 		<div class="con flex flex-jc-sb height-100p">
-			<a href="${pageContext.request.contextPath}/home/main" class="logo flex flex-ai-c"> <i class="fas fa-award"></i>
+			<a href="${pageContext.request.contextPath}/s/home/main" class="logo flex flex-ai-c"> <i class="fas fa-award"></i>
 			</a>
 
 			<nav class="menu-box-1">
 				<ul class="flex height-100p">
-					<li><a href="${pageContext.request.contextPath}/home/main" class="flex height-100p flex-ai-c">Home</a></li>
+					<li><a href="${pageContext.request.contextPath}/s/home/main" class="flex height-100p flex-ai-c">Home</a></li>
 					<li><a href="#" class="flex height-100p flex-ai-c">Articles</a></li>
-					<li><a href="${pageContext.request.contextPath}/home/aboutMe" class="flex height-100p flex-ai-c">AboutMe</a></li>
+					<li><a href="${pageContext.request.contextPath}/s/home/aboutMe" class="flex height-100p flex-ai-c">AboutMe</a></li>
 					<li><a href="#" class="flex height-100p flex-ai-c">SNS</a>
 						<ul>
 							<li><a href="https://github.com/wjxor" target="_blank" class="block">GITHUB</a></li>
