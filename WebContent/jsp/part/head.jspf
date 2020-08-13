@@ -27,7 +27,7 @@
 <script src="${pageContext.request.contextPath}/resource/js/home/common.js"></script>
 <script src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
 
-<title>장희성 블로그</title>
+<title>wjxor 블로그</title>
 </head>
 
 <body>
@@ -49,7 +49,7 @@
 					<a href="#" class="block">SNS</a>
 					<ul>
 						<li><a href="https://github.com/wjxor" target="_blank" class="block">GITHUB</a></li>
-						<li><a href="https://www.instagram.com/kosanghyeob" target="_blank" class="block">INSTA</a></li>
+						<li><a href="https://www.instagram.com/shko9405" target="_blank" class="block">INSTA</a></li>
 					</ul></li>
 			</ul>
 		</nav>
@@ -67,7 +67,7 @@
 					<li><a href="#" class="flex height-100p flex-ai-c">SNS</a>
 						<ul>
 							<li><a href="https://github.com/wjxor" target="_blank" class="block">GITHUB</a></li>
-							<li><a href="https://www.instagram.com/kosanghyeob" target="_blank" class="block">INSTA</a></li>
+							<li><a href="https://www.instagram.com/shko9405" target="_blank" class="block">INSTA</a></li>
 						</ul></li>
 				</ul>
 			</nav>
