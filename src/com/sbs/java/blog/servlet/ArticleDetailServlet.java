@@ -41,7 +41,7 @@ public class ArticleDetailServlet extends HttpServlet {
 		try (Connection connection = DriverManager.getConnection(url, user, password)) {
 			// DB 접속 성공
 
-			int id = Integer.parseInt(request.getParameter("id").trim());
+			int id = Integer.parseInt(request.getParameter("id"));
 			Article article = getArticle(connection, id);
 
 			request.setAttribute("article", article);
