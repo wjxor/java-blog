@@ -1,18 +1,3 @@
-DROP DATABASE IF EXISTS blog;
-CREATE DATABASE blog;
-USE blog;
-CREATE TABLE article (
-    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    regDate DATETIME NOT NULL,
-    updateDate DATETIME NOT NULL,
-    title CHAR(200),
-    `body` LONGTEXT NOT NULL
-);
-
-
-
-
-# 작업 8 DB
 # 캐릭터SET 설정
 SET NAMES utf8mb4;
 
@@ -50,19 +35,13 @@ CREATE TABLE article (
 );
 
 # 1번글 생성
-INSERT INTO article SET
-regDate = NOW(),
+INSERT INTO article 
+SET regDate = NOW(),
 updateDate = NOW(),
 cateItemId = 6,
 displayStatus = 1,
 title = '블로그를 시작합니다.',
 `body` = ''
-
-# 체크
-SELECT *
-FROM article;
-
-
 
 INSERT INTO article
 SET regDate = NOW(),
@@ -70,7 +49,7 @@ updateDate = NOW(),
 cateItemId = 1,
 displayStatus = 1,
 title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND());
+`body` = CONCAT('내용_', RAND())
 
 INSERT INTO article
 SET regDate = NOW(),
@@ -78,15 +57,15 @@ updateDate = NOW(),
 cateItemId = 2,
 displayStatus = 1,
 title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND());
+`body` = CONCAT('내용_', RAND())
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
-cateItemId =3,
+cateItemId = 3,
 displayStatus = 1,
 title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND());
+`body` = CONCAT('내용_', RAND())
 
 INSERT INTO article
 SET regDate = NOW(),
@@ -94,7 +73,7 @@ updateDate = NOW(),
 cateItemId = 4,
 displayStatus = 1,
 title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND());
+`body` = CONCAT('내용_', RAND())
 
 INSERT INTO article
 SET regDate = NOW(),
@@ -102,7 +81,7 @@ updateDate = NOW(),
 cateItemId = 5,
 displayStatus = 1,
 title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND());
+`body` = CONCAT('내용_', RAND())
 
 INSERT INTO article
 SET regDate = NOW(),
@@ -110,4 +89,4 @@ updateDate = NOW(),
 cateItemId = 6,
 displayStatus = 1,
 title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND());
+`body` = CONCAT('내용_', RAND())
