@@ -53,6 +53,8 @@ public class DBUtil {
 					}
 				}
 
+				System.out.println(row);
+
 				rows.add(row);
 			}
 		} catch (SQLException e) {
