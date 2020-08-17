@@ -7,6 +7,7 @@
 	List<Article> articles = (List<Article>) request.getAttribute("articles");
 int totalPage = (int) request.getAttribute("totalPage");
 int paramPage = (int) request.getAttribute("page");
+String cateItemName = (String) request.getAttribute("cateItemName");
 %>
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
 <script
@@ -60,6 +61,10 @@ int paramPage = (int) request.getAttribute("page");
 }
 </style>
 
+<h1 class="con">
+	<%=cateItemName%>
+</h1>
+
 <div class="con">총 게시물 수 : ${totalCount}</div>
 
 <div class="con">
@@ -81,13 +86,24 @@ int paramPage = (int) request.getAttribute("page");
 			for (int i = 1; i <= totalPage; i++) {
 		%>
 		<li class="<%=i == paramPage ? "current" : ""%>"><a
-			href="?cateItemId=${param.cateItemId}&page=<%=i%>" class="block"><%=i%></a></li>
+			href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=<%=i%>"
+			class="block"><%=i%></a></li>
 		<%
 			}
 		%>
 	</ul>
 </div>
 
+<div class="con search-box flex flex-jc-c">
 
+	<form action="${pageContext.request.contextPath}/s/article/list">
+		<input type="hidden" name="page" value="1" /> <input type="hidden"
+			name="cateItemId" value="${param.cateItemId}" /> <input
+			type="hidden" name="searchKeywordType" value="title" /> <input
+			type="text" name="searchKeyword" value="${param.searchKeyword}" />
+		<button type="submit">검색</button>
+	</form>
+
+</div>
 
 <%@ include file="/jsp/part/foot.jspf"%>

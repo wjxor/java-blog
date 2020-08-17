@@ -412,6 +412,12 @@ label[for] {
 	width: 100%;
 }
 
+@media ( max-width :799px) {
+	body {
+		padding-top: 50px;
+	}
+}
+
 .mobile-top-bar .btn-toggle-mobile-side-bar {
 	font-size: 2rem;
 	padding: 0 10px;
