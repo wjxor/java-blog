@@ -72,7 +72,7 @@ public class ArticleDao extends Dao {
 	public Article getForPrintArticle(int id) {
 		String sql = "";
 
-		sql += String.format("SELECT *, 'wjxor' AS extra__writer ");
+		sql += String.format("SELECT *, '장희성' AS extra__writer ");
 		sql += String.format("FROM article ");
 		sql += String.format("WHERE 1 ");
 		sql += String.format("AND id = %d ", id);
