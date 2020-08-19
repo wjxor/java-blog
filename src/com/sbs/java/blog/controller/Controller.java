@@ -22,7 +22,7 @@ public abstract class Controller {
 		this.actionMethodName = actionMethodName;
 		this.req = req;
 		this.resp = resp;
-		articleService = new ArticleService(dbConn, req, resp);
+		articleService = new ArticleService(dbConn);
 	}
 
 	public void beforeAction() {
