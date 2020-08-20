@@ -2,9 +2,9 @@
 SET NAMES utf8mb4;
 
 # DB 생성
-DROP DATABASE IF EXISTS site41;
-CREATE DATABASE site41;
-USE site41;
+DROP DATABASE IF EXISTS BD;
+CREATE DATABASE BD;
+USE BD;
 
 # 카테고리 테이블 생성
 DROP TABLE IF EXISTS cateItem;
@@ -49,7 +49,7 @@ updateDate = NOW(),
 cateItemId = 1,
 displayStatus = 1,
 title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND())
+`body` = CONCAT('내용_', RAND());
 
 INSERT INTO article
 SET regDate = NOW(),
@@ -57,7 +57,7 @@ updateDate = NOW(),
 cateItemId = 2,
 displayStatus = 1,
 title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND())
+`body` = CONCAT('내용_', RAND());
 
 INSERT INTO article
 SET regDate = NOW(),
@@ -65,7 +65,7 @@ updateDate = NOW(),
 cateItemId = 3,
 displayStatus = 1,
 title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND())
+`body` = CONCAT('내용_', RAND());
 
 INSERT INTO article
 SET regDate = NOW(),
@@ -73,7 +73,7 @@ updateDate = NOW(),
 cateItemId = 4,
 displayStatus = 1,
 title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND())
+`body` = CONCAT('내용_', RAND());
 
 INSERT INTO article
 SET regDate = NOW(),
@@ -81,7 +81,7 @@ updateDate = NOW(),
 cateItemId = 5,
 displayStatus = 1,
 title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND())
+`body` = CONCAT('내용_', RAND());
 
 INSERT INTO article
 SET regDate = NOW(),
@@ -89,4 +89,9 @@ updateDate = NOW(),
 cateItemId = 6,
 displayStatus = 1,
 title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND())
+`body` = CONCAT('내용_', RAND());
+
+
+SELECT *
+FROM article
+WHERE id = 91;
