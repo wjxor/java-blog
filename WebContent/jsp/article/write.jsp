@@ -13,18 +13,9 @@
 	align-items: center;
 	display: flex;
 }
-
-.form1
- 
-.form-row
-:not
-(
-:first-child
- 
-) {
-	margin-top: 10 px;
-}
-
+</style>
+<%="<style>.form1 .form-row:not(:first-child) { margin-top : 10px; }</style>"%>
+<style>
 .form1 .form-row>.label {
 	width: 100px;
 }
