@@ -11,6 +11,11 @@ public class SecSql {
 	private StringBuilder sqlBuilder;
 	private List<Object> datas;
 
+	@Override
+	public String toString() {
+		return "sql=" + getFormat() + ", data=" + datas;
+	}
+
 	public SecSql() {
 		sqlBuilder = new StringBuilder();
 		datas = new ArrayList<>();
