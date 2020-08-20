@@ -61,6 +61,10 @@ public class Article extends Dto {
 		return body;
 	}
 
+	public String getBodyForXTemplate() {
+		return body.replaceAll("(?i)script", "<!--REPLACE:script-->");
+	}
+
 	public void setBody(String body) {
 		this.body = body;
 	}
