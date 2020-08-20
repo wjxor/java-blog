@@ -58,13 +58,13 @@ public class DBUtil {
 				rows.add(row);
 			}
 		} catch (SQLException e) {
-			throw new SQLErrorException("SQL 예외, SQL : " + sql);
+			throw new SQLErrorException("SQL 예외, SQL : " + sql, e);
 		} finally {
 			if (rs != null) {
 				try {
 					rs.close();
 				} catch (SQLException e) {
-					throw new SQLErrorException("SQL 예외, rs 닫기" + sql);
+					throw new SQLErrorException("SQL 예외, rs 닫기, SQL : " + sql, e);
 				}
 			}
 
@@ -72,7 +72,7 @@ public class DBUtil {
 				try {
 					stmt.close();
 				} catch (SQLException e) {
-					throw new SQLErrorException("SQL 예외, stmt 닫기" + sql);
+					throw new SQLErrorException("SQL 예외, stmt 닫기, SQL : " + sql, e);
 				}
 			}
 		}
@@ -126,13 +126,13 @@ public class DBUtil {
 			}
 
 		} catch (SQLException e) {
-			throw new SQLErrorException("SQL 예외, SQL : " + sql);
+			throw new SQLErrorException("SQL 예외, SQL : " + sql, e);
 		} finally {
 			if (rs != null) {
 				try {
 					rs.close();
 				} catch (SQLException e) {
-					throw new SQLErrorException("SQL 예외, rs 닫기" + sql);
+					throw new SQLErrorException("SQL 예외, rs 닫기, SQL : " + sql, e);
 				}
 			}
 
@@ -140,7 +140,7 @@ public class DBUtil {
 				try {
 					stmt.close();
 				} catch (SQLException e) {
-					throw new SQLErrorException("SQL 예외, stmt 닫기" + sql);
+					throw new SQLErrorException("SQL 예외, stmt 닫기, SQL : " + sql, e);
 				}
 			}
 

@@ -64,7 +64,7 @@ public class App {
 		} catch (SQLException e) {
 			Util.printEx("SQL 예외(커넥션 열기)", resp, e);
 		} catch (SQLErrorException e) {
-			Util.printEx(e.getMessage(), resp, e);
+			Util.printEx(e.getMessage(), resp, e.getOrigin());
 		} catch (Exception e) {
 			Util.printEx("기타 예외", resp, e);
 		} finally {
