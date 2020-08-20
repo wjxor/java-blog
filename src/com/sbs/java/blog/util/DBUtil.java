@@ -1,6 +1,7 @@
 package com.sbs.java.blog.util;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -110,15 +111,15 @@ public class DBUtil {
 		return false;
 	}
 
-	public static int insert(Connection dbConn, String sql) {
+	public static int insert(Connection dbConn, SecSql sql) {
 		int id = -1;
 
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		ResultSet rs = null;
 
 		try {
-			stmt = dbConn.createStatement();
-			stmt.execute(sql, Statement.RETURN_GENERATED_KEYS);
+			stmt = sql.getPreparedStatement(dbConn);
+			stmt.executeUpdate();
 			rs = stmt.getGeneratedKeys();
 
 			if (rs.next()) {
