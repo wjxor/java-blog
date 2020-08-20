@@ -53,6 +53,9 @@
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/s/home/main"
 					class="block">Home</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/s/article/write"
+					class="block">Write</a></li>
 				<li><a href="#" class="block">Articles</a>
 					<ul>
 						<li><a
@@ -90,6 +93,10 @@
 				<ul class="flex height-100p">
 					<li><a href="${pageContext.request.contextPath}/s/home/main"
 						class="flex height-100p flex-ai-c">Home</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/s/article/write"
+						class="flex height-100p flex-ai-c">Write</a></li>
+					</li>
 					<li><a
 						href="${pageContext.request.contextPath}/s/article/list"
 						class="flex height-100p flex-ai-c">Articles</a>

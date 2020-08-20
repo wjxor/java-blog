@@ -109,4 +109,43 @@ public class DBUtil {
 
 		return false;
 	}
+
+	public static int insert(Connection dbConn, String sql) {
+		int id = -1;
+
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = dbConn.createStatement();
+			stmt.execute(sql, Statement.RETURN_GENERATED_KEYS);
+			rs = stmt.getGeneratedKeys();
+
+			if (rs.next()) {
+				id = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			throw new SQLErrorException("SQL 예외, SQL : " + sql);
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					throw new SQLErrorException("SQL 예외, rs 닫기" + sql);
+				}
+			}
+
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					throw new SQLErrorException("SQL 예외, stmt 닫기" + sql);
+				}
+			}
+
+		}
+
+		return id;
+	}
 }
