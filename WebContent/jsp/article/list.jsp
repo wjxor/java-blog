@@ -1,120 +1,109 @@
 <%@ page import="java.util.List"%>
-<%@ page import="com.sbs.java.blog.dto.CateItem"%>
+<%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/jsp/part/head.jspf"%>
 <%
-	List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
+	List<Article> articles = (List<Article>) request.getAttribute("articles");
+int totalPage = (int) request.getAttribute("totalPage");
+int paramPage = (int) request.getAttribute("page");
+String cateItemName = (String) request.getAttribute("cateItemName");
 %>
-
-<!DOCTYPE html>
-<html lang="ko">
-
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- 구글 폰트 불러오기 -->
-<!-- rotobo(400/900), notosanskr(400/900) -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;900&family=Roboto:wght@400;900&display=swap"
-	rel="stylesheet">
-
-<!-- 폰트어썸 불러오기 -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
-
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resource/css/common.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resource/css/home/main.css">
-
-<!-- 제이쿼리 불러오기 -->
+<!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
 <script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 
-<script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
+<!-- 하이라이트 라이브러리, 언어 -->
 <script
-	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/css.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/javascript.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/xml.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/php.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/php-template.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/sql.min.js"></script>
 
-<title>wjxor 블로그</title>
-</head>
+<!-- 코드 미러 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css" />
 
-<body>
-	<div class="mobile-top-bar visible-on-sm-down flex">
-		<a href="#" class="btn-toggle-mobile-side-bar flex flex-ai-c"> <i
-			class="fas fa-bars"></i> <i class="fas fa-times"></i>
-		</a> <a href="${pageContext.request.contextPath}/s/home/main"
-			class="logo absolute-center absolute-middle flex flex-ai-c"> <i
-			class="fas fa-award"></i>
-		</a>
-	</div>
-	<div class="mobile-side-bar flex flex-ai-c visible-on-sm-down">
-		<nav class="menu-box-1 flex-grow-1">
-			<ul>
-				<li><a href="${pageContext.request.contextPath}/s/home/main"
-					class="block">Home</a></li>
-				<li><a href="#" class="block">Articles</a>
-					<ul>
-						<li><a
-							href="${pageContext.request.contextPath}/s/article/list"
-							class="block">전체</a></li>
-						<%
-							for (CateItem cateItem : cateItems) {
-						%>
-						<li><a
-							href="${pageContext.request.contextPath}/s/article/list?cateItemId=<%=cateItem.getId()%>"
-							class="block"><%=cateItem.getName()%></a></li>
-						<%
-							}
-						%>
-					</ul></li>
-				<li><a href="${pageContext.request.contextPath}/s/home/aboutMe"
-					class="block">AboutMe</a></li>
-				<li><a href="#" class="block">SNS</a>
-					<ul>
-						<li><a href="https://github.com/wjxor" target="_blank"
-							class="block">GITHUB</a></li>
-						<li><a href="https://www.instagram.com/shko9405" target="_blank"
-							class="block">INSTA</a></li>
-					</ul></li>
-			</ul>
-		</nav>
-	</div>
-	<div class="top-bar visible-on-md-up">
-		<div class="con flex flex-jc-sb height-100p">
-			<a href="${pageContext.request.contextPath}/s/home/main"
-				class="logo flex flex-ai-c"> <i class="fas fa-award"></i>
-			</a>
+<!-- 토스트 UI 에디터, 자바스크립트 코어 -->
+<script
+	src="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.min.js"></script>
 
-			<nav class="menu-box-1">
-				<ul class="flex height-100p">
-					<li><a href="${pageContext.request.contextPath}/s/home/main"
-						class="flex height-100p flex-ai-c">Home</a></li>
-					<li><a
-						href="${pageContext.request.contextPath}/s/article/list"
-						class="flex height-100p flex-ai-c">Articles</a>
-						<ul>
-							<%
-								for (CateItem cateItem : cateItems) {
-							%>
-							<li><a
-								href="${pageContext.request.contextPath}/s/article/list?cateItemId=<%=cateItem.getId()%>"
-								class="block"><%=cateItem.getName()%></a></li>
-							<%
-								}
-							%>
-						</ul></li>
-					<li><a
-						href="${pageContext.request.contextPath}/s/home/aboutMe"
-						class="flex height-100p flex-ai-c">AboutMe</a></li>
-					<li><a href="#" class="flex height-100p flex-ai-c">SNS</a>
-						<ul>
-							<li><a href="https://github.com/wjxor" target="_blank"
-								class="block">GITHUB</a></li>
-							<li><a href="https://www.instagram.com/shko9405" target="_blank"
-								class="block">INSTA</a></li>
-						</ul></li>
-				</ul>
-			</nav>
-		</div>
-	</div>
+<!-- 토스트 UI 에디터, 신택스 하이라이트 플러그인 추가 -->
+<script
+	src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
+
+<!-- 토스트 UI 에디터, CSS 코어 -->
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+
+<style>
+.page-box>ul>li>a {
+	padding: 0 10px;
+	text-decoration: underline;
+	color: #787878;
+}
+
+.page-box>ul>li:hover>a {
+	color: black;
+}
+
+.page-box>ul>li.current>a {
+	color: red;
+}
+</style>
+
+<h1 class="con">
+	<%=cateItemName%>
+</h1>
+
+<div class="con">총 게시물 수 : ${totalCount}</div>
+
+<div class="con">
+	<ul>
+		<%
+			for (Article article : articles) {
+		%>
+		<li><a href="./detail?id=<%=article.getId()%>"><%=article.getId()%>,
+				<%=article.getCateItemId()%>, <%=article.getTitle()%></a></li>
+		<%
+			}
+		%>
+	</ul>
+</div>
+
+<div class="con page-box">
+	<ul class="flex flex-jc-c">
+		<%
+			for (int i = 1; i <= totalPage; i++) {
+		%>
+		<li class="<%=i == paramPage ? "current" : ""%>"><a
+			href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=<%=i%>"
+			class="block"><%=i%></a></li>
+		<%
+			}
+		%>
+	</ul>
+</div>
+
+<div class="con search-box flex flex-jc-c">
+
+	<form action="${pageContext.request.contextPath}/s/article/list">
+		<input type="hidden" name="page" value="1" /> <input type="hidden"
+			name="cateItemId" value="${param.cateItemId}" /> <input
+			type="hidden" name="searchKeywordType" value="title" /> <input
+			type="text" name="searchKeyword" value="${param.searchKeyword}" />
+		<button type="submit">검색</button>
+	</form>
+
+</div>
+
+<%@ include file="/jsp/part/foot.jspf"%>

@@ -40,7 +40,7 @@ public class App {
 	}
 
 	private String getDbUrl() {
-		return "jdbc:mysql://localhost:3306/site41?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull";
+		return "jdbc:mysql://localhost:3306/BD?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull";
 	}
 
 	public void start() throws ServletException, IOException {
@@ -119,7 +119,7 @@ public class App {
 		} else {
 			resp.getWriter().append("존재하지 않는 페이지 입니다.");
 		}
-		
+
 	}
 
 	private String getDbId() {
