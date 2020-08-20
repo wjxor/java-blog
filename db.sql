@@ -91,6 +91,8 @@ displayStatus = 1,
 title = CONCAT('제목_', RAND()),
 `body` = CONCAT('내용_', RAND());
 
+# 조회수 칼럼 추가
+ALTER TABLE article ADD COLUMN hit INT(10) UNSIGNED NOT NULL AFTER `body`;
 
 SELECT *
 FROM article

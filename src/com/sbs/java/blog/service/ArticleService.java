@@ -40,4 +40,8 @@ public class ArticleService extends Service {
 		return articleDao.write(cateItemId, title, body);
 	}
 
+	public void increaseHit(int id) {
+		articleDao.increaseHit(id);
+	}
+
 }

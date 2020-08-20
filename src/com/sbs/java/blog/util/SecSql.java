@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SecSql {
-	private String sqlType;
 	private StringBuilder sqlBuilder;
 	private List<Object> datas;
 
@@ -21,7 +20,7 @@ public class SecSql {
 		return getFormat().startsWith("INSERT");
 	}
 
-	public void append(Object... args) {
+	public SecSql append(Object... args) {
 		if (args.length > 0) {
 			String sqlBit = (String) args[0];
 			sqlBuilder.append(sqlBit + " ");
@@ -30,6 +29,8 @@ public class SecSql {
 		for (int i = 1; i < args.length; i++) {
 			datas.add(args[i]);
 		}
+
+		return this;
 	}
 
 	public PreparedStatement getPreparedStatement(Connection dbConn) throws SQLException {
@@ -57,5 +58,9 @@ public class SecSql {
 
 	public String getFormat() {
 		return sqlBuilder.toString();
+	}
+
+	public static SecSql from(String sql) {
+		return new SecSql().append(sql);
 	}
 }

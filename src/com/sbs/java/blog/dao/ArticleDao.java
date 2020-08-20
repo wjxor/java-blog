@@ -129,4 +129,12 @@ public class ArticleDao extends Dao {
 
 		return DBUtil.insert(dbConn, sql);
 	}
+
+	public int increaseHit(int id) {
+		SecSql sql = SecSql.from("UPDATE article");
+		sql.append("SET hit = hit + 1");
+		sql.append("WHERE id = ?", id);
+
+		return DBUtil.update(dbConn, sql);
+	}
 }
