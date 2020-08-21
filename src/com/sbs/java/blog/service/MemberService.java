@@ -26,4 +26,8 @@ public class MemberService extends Service {
 	public boolean isJoinableEmail(String email) {
 		return memberDao.isJoinableEmail(email);
 	}
+
+	public int getMemberIdByLoginIdAndLoginPw(String loginId, String loginPw) {
+		return memberDao.getMemberIdByLoginIdAndLoginPw(loginId, loginPw);
+	}
 }

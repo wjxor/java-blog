@@ -47,4 +47,13 @@ public class MemberDao extends Dao {
 
 		return DBUtil.selectRowIntValue(dbConn, sql) == 0;
 	}
+
+	public int getMemberIdByLoginIdAndLoginPw(String loginId, String loginPw) {
+		SecSql sql = SecSql.from("SELECT id");
+		sql.append("FROM `member`");
+		sql.append("WHERE loginId = ?", loginId);
+		sql.append("AND loginPw = ?", loginPw);
+
+		return DBUtil.selectRowIntValue(dbConn, sql);
+	}
 }
