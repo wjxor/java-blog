@@ -97,3 +97,28 @@ ALTER TABLE article ADD COLUMN hit INT(10) UNSIGNED NOT NULL AFTER `body`;
 SELECT *
 FROM article
 WHERE id = 91;
+
+# 회원 테이블 생성
+DROP TABLE IF EXISTS `member`;
+CREATE TABLE `member` (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    `loginId` CHAR(100) NOT NULL UNIQUE,
+    `loginPw` CHAR(100) NOT NULL,
+    `name` CHAR(100) NOT NULL, 
+    `nickname` CHAR(100) NOT NULL UNIQUE,
+    `email` CHAR(100) NOT NULL,
+    `level` INT(1) UNSIGNED DEFAULT 0 NOT NULL
+);
+
+# 마스터 회원 생성
+INSERT INTO `member` SET
+regDate = NOW(),
+updateDate = NOW(),
+`loginId` = 'admin',
+`loginPw` = 'admin',
+`name` = 'admin',
+`nickname` = 'admin',
+`email` = 'admin@admin.com',
+`level` = 10; 

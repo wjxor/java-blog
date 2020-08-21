@@ -348,6 +348,46 @@ label[for] {
 	flex: 1 0 0;
 }
 
+/* 커스텀 라이브러리 */
+/* lib */
+.form1 {
+	display: block;
+	width: 100%;
+}
+
+.form1 .form-row {
+	align-items: center;
+	display: flex;
+}
+
+.form1 .form-row>.label {
+	width: 100px;
+}
+
+.form1 .form-row>.input {
+	flex-grow: 1;
+}
+
+.form1 .form-row>.input>input, .form1 .form-row>.input>textarea {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 10px;
+}
+
+.form1 .form-row>.input>select {
+	padding: 10px;
+}
+
+.form1 .form-row>.input>textarea {
+	height: 500px;
+}
+
+@media ( max-width : 700px ) {
+	.form1 .form-row {
+		display: block;
+	}
+}
 /* 커스텀 */
 @media ( max-width :799px) {
 	.visible-on-md-up {

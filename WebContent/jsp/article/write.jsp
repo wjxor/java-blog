@@ -3,47 +3,6 @@
 <%@ include file="/jsp/part/head.jspf"%>
 
 <style>
-/* lib */
-.form1 {
-	display: block;
-	width: 100%;
-}
-
-.form1 .form-row {
-	align-items: center;
-	display: flex;
-}
-</style>
-<%="<style>.form1 .form-row:not(:first-child) { margin-top : 10px; }</style>"%>
-<style>
-.form1 .form-row>.label {
-	width: 100px;
-}
-
-.form1 .form-row>.input {
-	flex-grow: 1;
-}
-
-.form1 .form-row>.input>input, .form1 .form-row>.input>textarea {
-	display: block;
-	width: 100%;
-	box-sizing: border-box;
-	padding: 10px;
-}
-
-.form1 .form-row>.input>select {
-	padding: 10px;
-}
-
-.form1 .form-row>.input>textarea {
-	height: 500px;
-}
-
-@media ( max-width : 700px ) {
-	.form1 .form-row {
-		display: block;
-	}
-}
 /* cus */
 .write-form-box {
 	margin-top: 30px;

@@ -36,6 +36,8 @@
 <script
 	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
 
+<%="<style>.form1 .form-row:not(:first-child) { margin-top : 10px; }</style>"%>
+
 <title>wjxor 블로그</title>
 </head>
 
