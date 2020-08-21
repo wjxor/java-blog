@@ -18,4 +18,12 @@ public class MemberService extends Service {
 	public int join(String loginId, String loginPw, String name, String nickname, String email) {
 		return memberDao.join(loginId, loginPw, name, nickname, email);
 	}
+
+	public boolean isJoinableNickname(String nickname) {
+		return memberDao.isJoinableNickname(nickname);
+	}
+
+	public boolean isJoinableEmail(String email) {
+		return memberDao.isJoinableEmail(email);
+	}
 }
