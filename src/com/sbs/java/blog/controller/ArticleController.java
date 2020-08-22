@@ -116,4 +116,9 @@ public class ArticleController extends Controller {
 		req.setAttribute("articles", articles);
 		return "article/list.jsp";
 	}
+
+	@Override
+	public String getControllerName() {
+		return "article";
+	}
 }

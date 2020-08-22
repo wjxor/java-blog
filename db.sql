@@ -35,68 +35,13 @@ CREATE TABLE article (
 );
 
 # 1번글 생성
-INSERT INTO article 
-SET regDate = NOW(),
+INSERT INTO article SET
+regDate = NOW(),
 updateDate = NOW(),
 cateItemId = 6,
 displayStatus = 1,
 title = '블로그를 시작합니다.',
 `body` = ''
-
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-cateItemId = 1,
-displayStatus = 1,
-title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND());
-
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-cateItemId = 2,
-displayStatus = 1,
-title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND());
-
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-cateItemId = 3,
-displayStatus = 1,
-title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND());
-
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-cateItemId = 4,
-displayStatus = 1,
-title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND());
-
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-cateItemId = 5,
-displayStatus = 1,
-title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND());
-
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-cateItemId = 6,
-displayStatus = 1,
-title = CONCAT('제목_', RAND()),
-`body` = CONCAT('내용_', RAND());
-
-# 조회수 칼럼 추가
-ALTER TABLE article ADD COLUMN hit INT(10) UNSIGNED NOT NULL AFTER `body`;
-
-SELECT *
-FROM article
-WHERE id = 91;
 
 # 회원 테이블 생성
 DROP TABLE IF EXISTS `member`;
@@ -121,4 +66,12 @@ updateDate = NOW(),
 `name` = 'admin',
 `nickname` = 'admin',
 `email` = 'admin@admin.com',
-`level` = 10; 
+`level` = 10;
+
+# 게시물에 memberId 칼럼 추가
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER cateItemId;
+
+# 기존 게시물의 작성자 번호를 1번으로 정리(통일)
+UPDATE article
+SET memberId = 1
+WHERE memberId = 0;
