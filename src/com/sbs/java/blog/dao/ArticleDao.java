@@ -66,7 +66,7 @@ public class ArticleDao extends Dao {
 	public Article getForPrintArticle(int id) {
 		SecSql sql = new SecSql();
 
-		sql.append("SELECT *, 'wjxor' AS extra__writer ");
+		sql.append("SELECT *, '장희성' AS extra__writer ");
 		sql.append("FROM article ");
 		sql.append("WHERE 1 ");
 		sql.append("AND id = ? ", id);
@@ -104,7 +104,7 @@ public class ArticleDao extends Dao {
 		return new CateItem(DBUtil.selectRow(dbConn, sql));
 	}
 
-	public int write(int cateItemId, String title, String body) {
+	public int write(int cateItemId, String title, String body, int memberId) {
 		SecSql sql = new SecSql();
 
 		sql.append("INSERT INTO article");
@@ -114,18 +114,7 @@ public class ArticleDao extends Dao {
 		sql.append(", body = ? ", body);
 		sql.append(", displayStatus = '1'");
 		sql.append(", cateItemId = ?", cateItemId);
-
-		/*
-		 * String sql = "";
-		 * 
-		 * sql += String.format("INSERT INTO article "); sql +=
-		 * String.format("SET regDate = NOW() "); sql +=
-		 * String.format(", updateDate = NOW1() "); sql +=
-		 * String.format(", title = '%s' ", title); sql +=
-		 * String.format(", body = '%s' ", body); sql +=
-		 * String.format(", displayStatus = '1' "); sql +=
-		 * String.format(", cateItemId = '%d' ", cateItemId);
-		 */
+		sql.append(", memberId = ?", memberId);
 
 		return DBUtil.insert(dbConn, sql);
 	}

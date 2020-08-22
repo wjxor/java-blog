@@ -46,7 +46,9 @@ public class ArticleController extends Controller {
 		String body = req.getParameter("body");
 		int cateItemId = Util.getInt(req, "cateItemId");
 
-		int id = articleService.write(cateItemId, title, body);
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+
+		int id = articleService.write(cateItemId, title, body, loginedMemberId);
 
 		return "html:<script> alert('" + id + "번 게시물이 생성되었습니다.'); location.replace('list'); </script>";
 	}
