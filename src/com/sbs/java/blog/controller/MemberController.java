@@ -10,30 +10,27 @@ import com.sbs.java.blog.service.MemberService;
 
 public class MemberController extends Controller {
 
-	private MemberService memberService;
-
 	public MemberController(Connection dbConn, String actionMethodName, HttpServletRequest req,
 			HttpServletResponse resp) {
 		super(dbConn, actionMethodName, req, resp);
-		memberService = new MemberService(dbConn);
 	}
 
 	public String doAction() {
 		switch (actionMethodName) {
 		case "join":
-			return doActionJoin(req, resp);
+			return doActionJoin();
 		case "doJoin":
-			return doActionDoJoin(req, resp);
+			return doActionDoJoin();
 		case "login":
-			return doActionLogin(req, resp);
+			return doActionLogin();
 		case "doLogin":
-			return doActionDoLogin(req, resp);
+			return doActionDoLogin();
 		}
 
 		return "";
 	}
 
-	private String doActionDoLogin(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionDoLogin() {
 		String loginId = req.getParameter("loginId");
 		String loginPw = req.getParameter("loginPwReal");
 
@@ -49,11 +46,11 @@ public class MemberController extends Controller {
 		return String.format("html:<script> alert('로그인 되었습니다.'); location.replace('../home/main'); </script>");
 	}
 
-	private String doActionLogin(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionLogin() {
 		return "member/login.jsp";
 	}
 
-	private String doActionDoJoin(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionDoJoin() {
 
 		String loginId = req.getParameter("loginId");
 		String loginPw = req.getParameter("loginPwReal");
@@ -84,7 +81,7 @@ public class MemberController extends Controller {
 		return String.format("html:<script> alert('%s님 환영합니다.'); location.replace('../home/main'); </script>", name);
 	}
 
-	private String doActionJoin(HttpServletRequest req, HttpServletResponse resp) {
+	private String doActionJoin() {
 		return "member/join.jsp";
 	}
 }

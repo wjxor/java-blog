@@ -1,9 +1,13 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.sbs.java.blog.dto.CateItem"%>
+<%@ page import="com.sbs.java.blog.dto.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
+int loginedMemberId = (int) request.getAttribute("loginedMemberId");
+Member loginedMember = (Member) request.getAttribute("loginedMember");
+boolean isLogined = (boolean) request.getAttribute("isLogined");
 %>
 
 <!DOCTYPE html>
@@ -38,7 +42,29 @@
 
 <%="<style>.form1 .form-row:not(:first-child) { margin-top : 10px; }</style>"%>
 
+
 <title>wjxor 블로그</title>
+<script>
+	var loginedMemberId = parseInt("${loginedMemberId}");
+	var isLogined = "${isLogined}" == "true";
+	var loginedMember = null;
+</script>
+<%
+	if (isLogined) {
+%>
+<script>
+	loginedMember = {};
+	loginedMember["id"] = parseInt("${loginedMember.id}");
+	loginedMember["regDate"] = "${loginedMember.regDate}";
+	loginedMember["loginId"] = "${loginedMember.loginId}";
+	loginedMember["name"] = "${loginedMember.name}";
+	loginedMember["nickname"] = "${loginedMember.nickname}";
+	loginedMember["email"] = "${loginedMember.email}";
+</script>
+<%
+	}
+%>
+
 </head>
 
 <body>
@@ -127,3 +153,11 @@
 			</nav>
 		</div>
 	</div>
+	<%
+		if (loginedMember != null) {
+	%>
+	<div class="con"><%=loginedMember.getName()%>번 회원님 환영합니다.
+	</div>
+	<%
+		}
+	%>

@@ -2,6 +2,7 @@ package com.sbs.java.blog.dao;
 
 import java.sql.Connection;
 
+import com.sbs.java.blog.dto.Member;
 import com.sbs.java.blog.util.DBUtil;
 import com.sbs.java.blog.util.SecSql;
 
@@ -55,5 +56,13 @@ public class MemberDao extends Dao {
 		sql.append("AND loginPw = ?", loginPw);
 
 		return DBUtil.selectRowIntValue(dbConn, sql);
+	}
+
+	public Member getMemberById(int id) {
+		SecSql sql = SecSql.from("SELECT *");
+		sql.append("FROM `member`");
+		sql.append("WHERE id = ?", id);
+
+		return new Member(DBUtil.selectRow(dbConn, sql));
 	}
 }
