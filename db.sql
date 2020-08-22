@@ -2,9 +2,9 @@
 SET NAMES utf8mb4;
 
 # DB 생성
-DROP DATABASE IF EXISTS BD;
-CREATE DATABASE BD;
-USE BD;
+DROP DATABASE IF EXISTS site41;
+CREATE DATABASE site41;
+USE site41;
 
 # 카테고리 테이블 생성
 DROP TABLE IF EXISTS cateItem;
@@ -41,7 +41,7 @@ updateDate = NOW(),
 cateItemId = 6,
 displayStatus = 1,
 title = '블로그를 시작합니다.',
-`body` = ''
+`body` = '';
 
 # 회원 테이블 생성
 DROP TABLE IF EXISTS `member`;
@@ -62,11 +62,14 @@ INSERT INTO `member` SET
 regDate = NOW(),
 updateDate = NOW(),
 `loginId` = 'admin',
-`loginPw` = 'admin',
+`loginPw` = SHA2('admin', 256),
 `name` = 'admin',
 `nickname` = 'admin',
 `email` = 'admin@admin.com',
 `level` = 10;
+
+# 게시물에 memberId 칼럼 추가
+ALTER TABLE article ADD COLUMN hit INT(10) UNSIGNED NOT NULL DEFAULT 0 AFTER cateItemId;
 
 # 게시물에 memberId 칼럼 추가
 ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER cateItemId;
@@ -75,3 +78,39 @@ ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER cateItem
 UPDATE article
 SET memberId = 1
 WHERE memberId = 0;
+
+# 2번글 생성
+INSERT INTO article SET
+regDate = NOW(),
+updateDate = NOW(),
+cateItemId = 1,
+displayStatus = 1,
+memberId = 1,
+title = '제목, 블로그 글 2, cateItemId 1',
+`body` = '내용, 블로그 글 2, cateItemId 1';
+
+# 3번글 생성
+INSERT INTO article SET
+regDate = NOW(),
+updateDate = NOW(),
+cateItemId = 2,
+displayStatus = 1,
+memberId = 1,
+title = '제목, 블로그 글 3, cateItemId 2',
+`body` = '내용, 블로그 글 3, cateItemId 2';
+
+# 4번글 생성
+INSERT INTO article SET
+regDate = NOW(),
+updateDate = NOW(),
+cateItemId = 3,
+displayStatus = 1,
+memberId = 1,
+title = '제목, 블로그 글 4, cateItemId 3',
+`body` = '
+```xml
+<script>
+var a = 10;
+</script>
+```
+';
