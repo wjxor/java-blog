@@ -88,7 +88,8 @@ boolean isLogined = (boolean) request.getAttribute("isLogined");
 				<%
 					} else {
 				%>
-				<li><a href="${pageContext.request.contextPath}/s/member/login"
+				<li><a
+					href="${pageContext.request.contextPath}/s/member/login?afterLoginRedirectUrl=${urlEncodedAfterLoginRedirectUrl}"
 					class="block">Login</a></li>
 				<li><a href="${pageContext.request.contextPath}/s/member/join"
 					class="block">Join</a></li>
@@ -145,7 +146,7 @@ boolean isLogined = (boolean) request.getAttribute("isLogined");
 						} else {
 					%>
 					<li><a
-						href="${pageContext.request.contextPath}/s/member/login"
+						href="${pageContext.request.contextPath}/s/member/login?afterLoginRedirectUrl=${urlEncodedAfterLoginRedirectUrl}"
 						class="flex height-100p flex-ai-c">Login</a></li>
 					<li><a href="${pageContext.request.contextPath}/s/member/join"
 						class="flex height-100p flex-ai-c">Join</a></li>
