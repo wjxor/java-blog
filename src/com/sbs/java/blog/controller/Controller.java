@@ -75,7 +75,6 @@ public abstract class Controller {
 		// 로그인 페이지에서 로그인 페이지로 이동하는 버튼을 또 누른 경우
 		// 기존 afterLoginRedirectUrl 정보를 유지시키기 위한 로직
 		if (currentUrl.contains("/s/member/login")) {
-			System.out.println("currentUrl : " + currentUrl);
 			String urlEncodedOldAfterLoginRedirectUrl = Util.getString(req, "afterLoginRedirectUrl", "");
 			urlEncodedOldAfterLoginRedirectUrl = Util.getUrlEncoded(urlEncodedOldAfterLoginRedirectUrl);
 			req.setAttribute("urlEncodedAfterLoginRedirectUrl", urlEncodedOldAfterLoginRedirectUrl);
@@ -132,8 +131,11 @@ public abstract class Controller {
 			break;
 		}
 
+		String urlEncodedAfterLoginRedirectUrl = (String) req.getAttribute("urlEncodedAfterLoginRedirectUrl");
+
 		if (needToLogin && isLogined == false) {
-			return "html:<script> alert('로그인 후 이용해주세요.'); location.href = '../member/login'; </script>";
+			return "html:<script> alert('로그인 후 이용해주세요.'); location.href = '../member/login?afterLoginRedirectUrl="
+					+ urlEncodedAfterLoginRedirectUrl + "'; </script>";
 		}
 		// 로그인에 관련된 가드 끝
 
