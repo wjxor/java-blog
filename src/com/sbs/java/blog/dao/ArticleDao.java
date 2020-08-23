@@ -66,7 +66,7 @@ public class ArticleDao extends Dao {
 	public Article getForPrintArticle(int id) {
 		SecSql sql = new SecSql();
 
-		sql.append("SELECT *, '장희성' AS extra__writer ");
+		sql.append("SELECT *, 'wjxor' AS extra__writer ");
 		sql.append("FROM article ");
 		sql.append("WHERE 1 ");
 		sql.append("AND id = ? ", id);
@@ -125,5 +125,12 @@ public class ArticleDao extends Dao {
 		sql.append("WHERE id = ?", id);
 
 		return DBUtil.update(dbConn, sql);
+	}
+
+	public int deleteArticle(int id) {
+		SecSql sql = SecSql.from("DELETE FROM article");
+		sql.append("WHERE id = ?", id);
+
+		return DBUtil.delete(dbConn, sql);
 	}
 }

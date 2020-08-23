@@ -67,17 +67,62 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 
 <div class="con">총 게시물 수 : ${totalCount}</div>
 
-<div class="con">
-	<ul>
-		<%
-			for (Article article : articles) {
-		%>
-		<li><a href="./detail?id=<%=article.getId()%>"><%=article.getId()%>,
-				<%=article.getCateItemId()%>, <%=article.getTitle()%></a></li>
-		<%
-			}
-		%>
-	</ul>
+<div class="con table-box">
+	<table>
+		<colgroup>
+			<col width="100">
+			<col width="200">
+			<col width="120">
+			<col>
+			<col width="120">
+		</colgroup>
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>날짜</th>
+				<th>카테고리 아이템</th>
+				<th>제목</th>
+				<th>비고</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%
+				for (Article article : articles) {
+			%>
+			<tr>
+				<td class="text-align-center"><a
+					href="./detail?id=<%=article.getId()%>"><%=article.getId()%></a></td>
+				<td class="text-align-center"><%=article.getRegDate()%></td>
+				<td class="text-align-center"><%=article.getCateItemId()%></td>
+				<td><a href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></td>
+				<td>
+					<div class="inline-block">
+						<%
+							if ((boolean) article.getExtra().get("deleteAvailable")) {
+						%>
+						<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;"
+							href="./doDelete?id=<%=article.getId()%>">삭제</a>
+						<%
+							}
+						%>
+					</div>
+					<div class="inline-block">
+						<%
+							if ((boolean) article.getExtra().get("modifyAvailable")) {
+						%>
+						<a onclick="if ( confirm('수정하시겠습니까?') == false ) return false;"
+							href="./modify?id=<%=article.getId()%>">수정</a>
+						<%
+							}
+						%>
+					</div>
+				</td>
+			</tr>
+			<%
+				}
+			%>
+		</tbody>
+	</table>
 </div>
 
 <div class="con page-box">
