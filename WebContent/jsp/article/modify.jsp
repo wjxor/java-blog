@@ -1,13 +1,9 @@
-<%@ page import="java.util.List"%>
 <%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <%
-	List<Article> articles = (List<Article>) request.getAttribute("articles");
-int totalPage = (int) request.getAttribute("totalPage");
-int paramPage = (int) request.getAttribute("page");
-String cateItemName = (String) request.getAttribute("cateItemName");
+	Article article = (Article) request.getAttribute("article");
 %>
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
 <script
@@ -35,7 +31,7 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 
 <!-- 토스트 UI 에디터, 자바스크립트 코어 -->
 <script
-	src="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.min.js"></script>
+	src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 
 <!-- 토스트 UI 에디터, 신택스 하이라이트 플러그인 추가 -->
 <script
@@ -45,56 +41,31 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 
-<style>
-.page-box>ul>li>a {
-	padding: 0 10px;
-	text-decoration: underline;
-	color: #787878;
-}
-
-.page-box>ul>li:hover>a {
-	color: black;
-}
-
-.page-box>ul>li.current>a {
-	color: red;
-}
-</style>
-
-<h1 class="con">
-	<%=cateItemName%>
-</h1>
-
-<div class="con">총 게시물 수 : ${totalCount}</div>
-
 <div class="con table-box">
 	<table>
 		<colgroup>
-			<col width="100">
 			<col width="200">
-			<col width="120">
-			<col>
-			<col width="120">
 		</colgroup>
-		<thead>
+
+		<tbody>
 			<tr>
 				<th>번호</th>
-				<th>날짜</th>
-				<th>카테고리 아이템</th>
-				<th>제목</th>
-				<th>비고</th>
+				<td><%=article.getId()%></td>
 			</tr>
-		</thead>
-		<tbody>
-			<%
-				for (Article article : articles) {
-			%>
 			<tr>
-				<td class="text-align-center"><a
-					href="./detail?id=<%=article.getId()%>"><%=article.getId()%></a></td>
-				<td class="text-align-center"><%=article.getRegDate()%></td>
-				<td class="text-align-center"><%=article.getCateItemId()%></td>
-				<td><a href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></td>
+				<th>날짜</th>
+				<td><%=article.getRegDate()%></td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td><%=article.getTitle()%></td>
+			</tr>
+			<tr>
+				<th>조회</th>
+				<td><%=article.getHit()%></td>
+			</tr>
+			<tr>
+				<th>비고</th>
 				<td>
 					<div class="inline-block">
 						<%
@@ -117,37 +88,29 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 					</div>
 				</td>
 			</tr>
-			<%
-				}
-			%>
+			<tr>
+				<td colspan="2"><script type="text/x-template" id="origin1"
+						style="display: none;"><%=article.getBodyForXTemplate()%></script>
+					<div id="viewer1"></div> <script>
+						var editor1__initialValue = getBodyFromXTemplate('#origin1');
+						var editor1 = new toastui.Editor({
+							el : document.querySelector('#viewer1'),
+							initialValue : editor1__initialValue,
+							viewer : true,
+							plugins : [
+									toastui.Editor.plugin.codeSyntaxHighlight,
+									youtubePlugin, replPlugin, codepenPlugin ]
+						});
+					</script></td>
+			</tr>
 		</tbody>
 	</table>
-</div>
 
-<div class="con page-box">
-	<ul class="flex flex-jc-c">
-		<%
-			for (int i = 1; i <= totalPage; i++) {
-		%>
-		<li class="<%=i == paramPage ? "current" : ""%>"><a
-			href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=<%=i%>"
-			class="block"><%=i%></a></li>
-		<%
-			}
-		%>
-	</ul>
-</div>
 
-<div class="con search-box flex flex-jc-c">
 
-	<form action="${pageContext.request.contextPath}/s/article/list">
-		<input type="hidden" name="page" value="1" /> <input type="hidden"
-			name="cateItemId" value="${param.cateItemId}" /> <input
-			type="hidden" name="searchKeywordType" value="title" /> <input
-			type="text" name="searchKeyword" value="${param.searchKeyword}" />
-		<button type="submit">검색</button>
-	</form>
 
 </div>
+
+
 
 <%@ include file="/jsp/part/foot.jspf"%>
