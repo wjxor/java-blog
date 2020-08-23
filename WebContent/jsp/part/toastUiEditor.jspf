@@ -191,38 +191,6 @@
 	}
 	// repl 플러그인 끝
 
-	// lib 시작
-	String.prototype.replaceAll = function(org, dest) {
-		return this.split(org).join(dest);
-	}
-
-	function getUrlParams(url) {
-		url = url.trim();
-		url = url.replaceAll('&amp;', '&');
-		if (url.indexOf('#') !== -1) {
-			var pos = url.indexOf('#');
-			url = url.substr(0, pos);
-		}
-
-		var params = {};
-
-		url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) {
-			params[key] = value;
-		});
-		return params;
-	}
-
-	function jq_attr($el, attrName, elseValue) {
-		var value = $el.attr(attrName);
-
-		if (value === undefined || value === "") {
-			return elseValue;
-		}
-
-		return value;
-	}
-	// lib 끝
-
 	function ToastEditor__getBodyFromXTemplate($el) {
 		return $el.html().trim().replace(/<!--REPLACE:script-->/gi, 'script');
 	}
@@ -235,7 +203,7 @@
 					var initialValue = ToastEditor__getBodyFromXTemplate($el
 							.prev());
 
-					new toastui.Editor.factory({
+					var editor = new toastui.Editor.factory({
 						el : el,
 						viewer : true,
 						initialValue : initialValue,
@@ -244,19 +212,22 @@
 					});
 
 					$el.addClass('toast-editor-loaded');
+
+					$el.data('data-toast-editor', editor);
 				});
 
 		$('.toast-editor:not(.toast-editor-loaded)').each(
 				function(index, el) {
 					var $el = $(this);
 					var height = jq_attr($el, 'data-toast-editor-height', 500);
+					height = parseInt(height);
 					var initialEditType = jq_attr($el,
 							'data-toast-editor-initialEditType', "markdown");
 					var previewStyle = jq_attr($el,
 							'data-toast-editor-previewStyle', "vertical");
 					var initialValue = ToastEditor__getBodyFromXTemplate($el
 							.prev());
-					new toastui.Editor({
+					var editor = new toastui.Editor({
 						el : el,
 						height : height,
 						initialEditType : initialEditType,
@@ -267,6 +238,8 @@
 					});
 
 					$el.addClass('toast-editor-loaded');
+
+					$el.data('data-toast-editor', editor);
 				});
 	}
 

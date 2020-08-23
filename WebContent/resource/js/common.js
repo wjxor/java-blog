@@ -1,5 +1,38 @@
 console.clear();
 
+// lib 시작 
+String.prototype.replaceAll = function(org, dest) {
+	return this.split(org).join(dest);
+}
+
+function getUrlParams(url) {
+	url = url.trim();
+	url = url.replaceAll('&amp;', '&');
+	if (url.indexOf('#') !== -1) {
+		var pos = url.indexOf('#');
+		url = url.substr(0, pos);
+	}
+
+	var params = {};
+
+	url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) {
+		params[key] = value;
+	});
+	return params;
+}
+
+function jq_attr($el, attrName, elseValue) {
+	var value = $el.attr(attrName);
+
+	if (value === undefined || value === "") {
+		return elseValue;
+	}
+
+	return value;
+}
+
+// lib 끝
+
 function MobileSideBar__init() {
 	$('.mobile-top-bar .btn-toggle-mobile-side-bar').click(function() {
 		var $this = $(this);
