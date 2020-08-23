@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="pageTitle" value="${cateItemName}"></c:set>
 <%@ page import="java.util.List"%>
 <%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -55,8 +57,6 @@
 	color: red;
 }
 </style>
-
-<h1 class="con">${cateItemName}</h1>
 
 <div class="con">총 게시물 수 : ${totalCount}</div>
 

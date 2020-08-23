@@ -9,7 +9,7 @@ public class Article extends Dto {
 	private int hit;
 	private String title;
 	private String body;
-
+	
 	public int getHit() {
 		return hit;
 	}
@@ -17,7 +17,7 @@ public class Article extends Dto {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-
+	
 	public int getMemberId() {
 		return memberId;
 	}
@@ -70,7 +70,7 @@ public class Article extends Dto {
 	public String getBody() {
 		return body;
 	}
-
+	
 	public String getBodyForXTemplate() {
 		return body.replaceAll("(?i)script", "<!--REPLACE:script-->");
 	}

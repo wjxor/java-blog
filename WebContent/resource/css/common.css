@@ -554,3 +554,10 @@ label[for] {
 }
 
 /* 모바일 사이드바 끝 */
+
+/* 페이지 타이틀 시작 */
+.page-title {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+/* 페이지 타이틀 끝 */
