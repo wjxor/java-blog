@@ -457,6 +457,7 @@ label[for] {
 	width: 100%;
 	border: 10px solid black;
 	border-top-width: 0;
+	z-index: 10;
 }
 
 .top-bar .menu-box-1 ul>li:hover>ul {
@@ -526,6 +527,7 @@ label[for] {
 	background-color: black;
 	color: white;
 	display: none;
+	z-index: 10;
 }
 
 .mobile-side-bar.active {

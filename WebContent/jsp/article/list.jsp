@@ -3,12 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
-<%
-	List<Article> articles = (List<Article>) request.getAttribute("articles");
-int totalPage = (int) request.getAttribute("totalPage");
-int paramPage = (int) request.getAttribute("page");
-String cateItemName = (String) request.getAttribute("cateItemName");
-%>
+
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
@@ -61,9 +56,7 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 }
 </style>
 
-<h1 class="con">
-	<%=cateItemName%>
-</h1>
+<h1 class="con">${cateItemName}</h1>
 
 <div class="con">총 게시물 수 : ${totalCount}</div>
 
@@ -86,55 +79,32 @@ String cateItemName = (String) request.getAttribute("cateItemName");
 			</tr>
 		</thead>
 		<tbody>
-			<%
-				for (Article article : articles) {
-			%>
-			<tr>
-				<td class="text-align-center"><a
-					href="./detail?id=<%=article.getId()%>"><%=article.getId()%></a></td>
-				<td class="text-align-center"><%=article.getRegDate()%></td>
-				<td class="text-align-center"><%=article.getCateItemId()%></td>
-				<td><a href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></td>
-				<td>
-					<div class="inline-block">
-						<%
-							if ((boolean) article.getExtra().get("deleteAvailable")) {
-						%>
-						<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;"
-							href="./doDelete?id=<%=article.getId()%>">삭제</a>
-						<%
-							}
-						%>
-					</div>
-					<div class="inline-block">
-						<%
-							if ((boolean) article.getExtra().get("modifyAvailable")) {
-						%>
-						<a href="./modify?id=<%=article.getId()%>">수정</a>
-						<%
-							}
-						%>
-					</div>
-				</td>
-			</tr>
-			<%
-				}
-			%>
+			<c:forEach items="${articles}" var="article">
+				<tr>
+					<td class="text-align-center"><a
+						href="./detail?id=${article.id}">${article.id}</a></td>
+					<td class="text-align-center">${article.regDate}</td>
+					<td class="text-align-center">${article.cateItemId}</td>
+					<td><a href="./detail?id=${article.id}">${article.title}</a></td>
+					<td><c:if test="${article.extra.deleteAvailable}">
+							<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;"
+								href="./doDelete?id=${article.id}">삭제</a>
+						</c:if> <c:if test="${article.extra.modifyAvailable}">
+							<a href="./modify?id=${article.id}">수정</a>
+						</c:if></td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 </div>
 
 <div class="con page-box">
 	<ul class="flex flex-jc-c">
-		<%
-			for (int i = 1; i <= totalPage; i++) {
-		%>
-		<li class="<%=i == paramPage ? "current" : ""%>"><a
-			href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=<%=i%>"
-			class="block"><%=i%></a></li>
-		<%
-			}
-		%>
+		<c:forEach var="i" begin="1" end="${totalPage}" step="1">
+			<li class="${i == cPage ? 'current' : ''}"><a
+				href="?cateItemId=${param.cateItemId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}&page=${i}"
+				class="block">${i}</a></li>
+		</c:forEach>
 	</ul>
 </div>
 

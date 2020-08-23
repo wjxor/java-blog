@@ -3,9 +3,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <%@ include file="/jsp/part/toastUiEditor.jspf"%>
-<%
-	Article article = (Article) request.getAttribute("article");
-%>
 
 <div class="con">
 	<h1>게시물 상세페이지</h1>
@@ -20,46 +17,31 @@
 		<tbody>
 			<tr>
 				<th>번호</th>
-				<td><%=article.getId()%></td>
+				<td>${article.id}</td>
 			</tr>
 			<tr>
 				<th>날짜</th>
-				<td><%=article.getRegDate()%></td>
+				<td>${article.regDate}</td>
 			</tr>
 			<tr>
 				<th>제목</th>
-				<td><%=article.getTitle()%></td>
+				<td>${article.title}</td>
 			</tr>
 			<tr>
 				<th>조회</th>
-				<td><%=article.getHit()%></td>
+				<td>${article.hit}</td>
 			</tr>
 			<tr>
 				<th>비고</th>
-				<td>
-					<div class="inline-block">
-						<%
-							if ((boolean) article.getExtra().get("deleteAvailable")) {
-						%>
+				<td><c:if test="${article.extra.deleteAvailable}">
 						<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;"
-							href="./doDelete?id=<%=article.getId()%>">삭제</a>
-						<%
-							}
-						%>
-					</div>
-					<div class="inline-block">
-						<%
-							if ((boolean) article.getExtra().get("modifyAvailable")) {
-						%>
-						<a href="./modify?id=<%=article.getId()%>">수정</a>
-						<%
-							}
-						%>
-					</div>
-				</td>
+							href="./doDelete?id=${article.id}">삭제</a>
+					</c:if> <c:if test="${article.extra.modifyAvailable}">
+						<a href="./modify?id=${article.id}">수정</a>
+					</c:if></td>
 			</tr>
 			<tr>
-				<td colspan="2"><script type="text/x-template"><%=article.getBodyForXTemplate()%></script>
+				<td colspan="2"><script type="text/x-template">${article.bodyForXTemplate}</script>
 					<div class="toast-editor toast-editor-viewer"></div></td>
 			</tr>
 		</tbody>
