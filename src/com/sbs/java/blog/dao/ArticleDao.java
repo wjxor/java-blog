@@ -133,4 +133,17 @@ public class ArticleDao extends Dao {
 
 		return DBUtil.delete(dbConn, sql);
 	}
+
+	public int modifyArticle(int id, int cateItemId, String title, String body) {
+		SecSql sql = new SecSql();
+
+		sql.append("UPDATE article");
+		sql.append("SET updateDate = NOW()");
+		sql.append(", title = ? ", title);
+		sql.append(", body = ? ", body);
+		sql.append(", cateItemId = ?", cateItemId);
+		sql.append("WHERE id = ?", id);
+
+		return DBUtil.update(dbConn, sql);
+	}
 }

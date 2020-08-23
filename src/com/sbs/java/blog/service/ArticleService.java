@@ -103,4 +103,12 @@ public class ArticleService extends Service {
 		return getCheckRsDeleteAvailable(article, actorId);
 	}
 
+	public Map<String, Object> getCheckRsModifyAvailable(int id, int actorId) {
+		return getCheckRsDeleteAvailable(id, actorId);
+	}
+
+	public int modifyArticle(int id, int cateItemId, String title, String body) {
+		return articleDao.modifyArticle(id, cateItemId, title, body);
+	}
+
 }

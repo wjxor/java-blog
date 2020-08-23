@@ -10,6 +10,10 @@
 }
 </style>
 
+<div class="con">
+	<h1>게시물 작성</h1>
+</div>
+
 <script>
 	var submitWriteFormDone = false;
 	function submitWriteForm(form) {
@@ -71,9 +75,9 @@
 			</div>
 		</div>
 		<div class="form-row">
-			<div class="label">전송</div>
+			<div class="label">작성</div>
 			<div class="input">
-				<input type="submit" value="전송" /> <a href="list">취소</a>
+				<input type="submit" value="작성" /> <a href="list">취소</a>
 			</div>
 		</div>
 	</form>

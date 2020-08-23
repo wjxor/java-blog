@@ -35,6 +35,8 @@ public class ArticleController extends Controller {
 			return doActionDoWrite();
 		case "doDelete":
 			return doActionDoDelete();
+		case "doModify":
+			return doActionDoModify();
 		case "write":
 			return doActionWrite();
 		}
@@ -44,6 +46,34 @@ public class ArticleController extends Controller {
 
 	private String doActionWrite() {
 		return "article/write.jsp";
+	}
+
+	private String doActionDoModify() {
+		if (Util.empty(req, "id")) {
+			return "html:id를 입력해주세요.";
+		}
+
+		if (Util.isNum(req, "id") == false) {
+			return "html:id를 정수로 입력해주세요.";
+		}
+
+		int id = Util.getInt(req, "id");
+
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+
+		Map<String, Object> getCheckRsModifyAvailableRs = articleService.getCheckRsModifyAvailable(id, loginedMemberId);
+
+		if (Util.isSuccess(getCheckRsModifyAvailableRs) == false) {
+			return "html:<script> alert('" + getCheckRsModifyAvailableRs.get("msg") + "'); history.back(); </script>";
+		}
+
+		int cateItemId = Util.getInt(req, "cateItemId");
+		String title = Util.getString(req, "title");
+		String body = Util.getString(req, "body");
+
+		articleService.modifyArticle(id, cateItemId, title, body);
+
+		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('detail?id=" + id + "'); </script>";
 	}
 
 	private String doActionDoDelete() {
