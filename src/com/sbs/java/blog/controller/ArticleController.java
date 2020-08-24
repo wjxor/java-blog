@@ -64,6 +64,8 @@ public class ArticleController extends Controller {
 
 		int id = articleService.writeArticleReply(articleId, loginedMemberId, body);
 
+		redirectUrl = Util.adParamFrom(redirectUrl, "generatedArticleReplyId", id);
+
 		return "html:<script> alert('" + id + "번 댓글이 작성되었습니다.'); location.replace('" + redirectUrl + "'); </script>";
 	}
 
