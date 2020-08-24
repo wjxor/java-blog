@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.Article;
+import com.sbs.java.blog.dto.ArticleReply;
 import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.util.Util;
 
@@ -151,7 +152,10 @@ public class ArticleController extends Controller {
 		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 		Article article = articleService.getForPrintArticle(id, loginedMemberId);
 
+		List<ArticleReply> articleReplies = articleService.getForPrintArticleReplies(id, loginedMemberId);
+
 		req.setAttribute("article", article);
+		req.setAttribute("articleReplies", articleReplies);
 
 		return "article/detail.jsp";
 	}

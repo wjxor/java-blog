@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.sbs.java.blog.dao.ArticleDao;
 import com.sbs.java.blog.dto.Article;
+import com.sbs.java.blog.dto.ArticleReply;
 import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.util.Util;
 
@@ -36,6 +37,41 @@ public class ArticleService extends Service {
 
 		boolean modifyAvailable = Util.isSuccess(getCheckRsModifyAvailable(article, actorId));
 		article.getExtra().put("modifyAvailable", modifyAvailable);
+	}
+
+	private void updateArticleReplyExtraDataForPrint(ArticleReply articleReply, int actorId) {
+		boolean deleteAvailable = Util.isSuccess(getReplyCheckRsDeleteAvailable(articleReply, actorId));
+		articleReply.getExtra().put("deleteAvailable", deleteAvailable);
+
+		boolean modifyAvailable = Util.isSuccess(getReplyCheckRsModifyAvailable(articleReply, actorId));
+		articleReply.getExtra().put("modifyAvailable", modifyAvailable);
+	}
+
+	private Map<String, Object> getReplyCheckRsModifyAvailable(ArticleReply articleReply, int actorId) {
+		return getReplyCheckRsDeleteAvailable(articleReply, actorId);
+	}
+
+	private Map<String, Object> getReplyCheckRsDeleteAvailable(ArticleReply articleReply, int actorId) {
+		Map<String, Object> rs = new HashMap<>();
+
+		if (articleReply == null) {
+			rs.put("resultCode", "F-1");
+			rs.put("msg", "존재하지 않는 댓글 입니다.");
+
+			return rs;
+		}
+
+		if (articleReply.getMemberId() != actorId) {
+			rs.put("resultCode", "F-2");
+			rs.put("msg", "권한이 없습니다.");
+
+			return rs;
+		}
+
+		rs.put("resultCode", "S-1");
+		rs.put("msg", "작업이 가능합니다.");
+
+		return rs;
 	}
 
 	public int getForPrintListArticlesCount(int cateItemId, String searchKeywordType, String searchKeyword) {
@@ -113,6 +149,16 @@ public class ArticleService extends Service {
 
 	public int writeArticleReply(int articleId, int memberId, String body) {
 		return articleDao.writeArticleReply(articleId, memberId, body);
+	}
+
+	public List<ArticleReply> getForPrintArticleReplies(int articleId, int actorId) {
+		List<ArticleReply> articleReplies = articleDao.getForPrintArticleReplies(articleId, actorId);
+
+		for (ArticleReply articleReply : articleReplies) {
+			updateArticleReplyExtraDataForPrint(articleReply, actorId);
+		}
+
+		return articleReplies;
 	}
 
 }

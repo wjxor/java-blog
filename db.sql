@@ -125,3 +125,11 @@ CREATE TABLE articleReply (
     displayStatus TINYINT(1) UNSIGNED NOT NULL,
     `body` TEXT NOT NULL
 );
+
+# 게시물에 memberId 칼럼 추가
+ALTER TABLE articleReply ADD COLUMN articleId INT(10) UNSIGNED NOT NULL DEFAULT 0 AFTER memberId;
+
+# 기존 게시물 댓글의 게시물 번호를 1번으로 정리(통일)
+UPDATE articleReply
+SET articleId = 1
+WHERE articleId = 0;

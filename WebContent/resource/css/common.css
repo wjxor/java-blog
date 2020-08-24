@@ -354,6 +354,14 @@ label[for] {
 	flex: 1 0 0;
 }
 
+.padding-left-10 {
+	padding-left: 10px;
+}
+
+.padding-right-10 {
+	padding-right: 10px;
+}
+
 /* 커스텀 라이브러리 */
 /* lib */
 .form1 {
