@@ -114,3 +114,14 @@ var a = 10;
 </script>
 ```
 ';
+
+# 댓글 테이블 추가
+DROP TABLE IF EXISTS articleReply;
+CREATE TABLE articleReply (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
+    displayStatus TINYINT(1) UNSIGNED NOT NULL,
+    `body` TEXT NOT NULL
+);

@@ -3,7 +3,7 @@
 <%@ page import="com.sbs.java.blog.dto.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="p" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -44,6 +44,40 @@
 	var isLogined = "${isLogined}" == "true";
 	var loginedMember = null;
 </script>
+
+
+<script>
+	var param = {};
+</script>
+<c:forEach var="pageParameter" items="${param}">
+	<script>
+		param["${pageParameter.key}"] = "${pageParameter.value}";
+	</script>
+</c:forEach>
+
+<script>
+	if (!param.jsAction) {
+		param.jsAction = '';
+	}
+
+	var jsActions = param.jsAction.split(',');
+
+	for ( var key in jsActions) {
+		var jsActionFuncName = jsActions[key];
+
+		$(function() {
+			setTimeout(function() {
+				if (window[jsActionFuncName]) {
+					window[jsActionFuncName]();
+				} else {
+					console.error("jsAction으로 요청받은, " + jsActionFuncName
+							+ " 함수는 존재하지 않아서 실행하지 못했습니다.");
+				}
+			}, 100);
+		});
+	}
+</script>
+
 <c:if test="${isLogined}">
 	<script>
 		loginedMember = {};

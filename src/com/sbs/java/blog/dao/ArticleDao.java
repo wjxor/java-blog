@@ -146,4 +146,17 @@ public class ArticleDao extends Dao {
 
 		return DBUtil.update(dbConn, sql);
 	}
+
+	public int writeArticleReply(int articleId, int memberId, String body) {
+		SecSql sql = new SecSql();
+
+		sql.append("INSERT INTO articleReply");
+		sql.append("SET regDate = NOW()");
+		sql.append(", updateDate = NOW()");
+		sql.append(", body = ? ", body);
+		sql.append(", displayStatus = '1'");
+		sql.append(", memberId = ?", memberId);
+
+		return DBUtil.insert(dbConn, sql);
+	}
 }

@@ -33,6 +33,8 @@ public class ArticleController extends Controller {
 			return doActionDetail();
 		case "doWrite":
 			return doActionDoWrite();
+		case "doWriteReply":
+			return doActionDoWriteReply();
 		case "doDelete":
 			return doActionDoDelete();
 		case "doModify":
@@ -42,6 +44,26 @@ public class ArticleController extends Controller {
 		}
 
 		return "";
+	}
+
+	private String doActionDoWriteReply() {
+		if (Util.empty(req, "articleId")) {
+			return "html:articleId를 입력해주세요.";
+		}
+
+		if (Util.isNum(req, "articleId") == false) {
+			return "html:articleId를 정수로 입력해주세요.";
+		}
+
+		int articleId = Util.getInt(req, "articleId");
+
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		String body = Util.getString(req, "body");
+		String redirectUrl = Util.getString(req, "redirectUrl");
+
+		int id = articleService.writeArticleReply(articleId, loginedMemberId, body);
+
+		return "html:<script> alert('" + id + "번 댓글이 작성되었습니다.'); location.replace('" + redirectUrl + "'); </script>";
 	}
 
 	private String doActionWrite() {
