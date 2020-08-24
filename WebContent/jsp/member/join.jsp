@@ -5,7 +5,6 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
-
 <style>
 /* cus */
 .join-form-box {
