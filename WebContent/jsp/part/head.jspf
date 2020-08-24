@@ -106,7 +106,7 @@
 			<ul>
 				<c:if test="${isLogined}">
 					<li><a
-						href="${pageContext.request.contextPath}/s/member/doLogout"
+						href="${pageContext.request.contextPath}/s/member/doLogout?redirectUrl==${urlEncodedAfterLogoutRedirectUrl}"
 						class="block">Logout</a></li>
 				</c:if>
 				<c:if test="${isLogined == false}">
@@ -154,7 +154,7 @@
 				<ul class="flex height-100p">
 					<c:if test="${isLogined}">
 						<li><a
-							href="${pageContext.request.contextPath}/s/member/doLogout"
+							href="${pageContext.request.contextPath}/s/member/doLogout?redirectUrl=${urlEncodedAfterLogoutRedirectUrl}"
 							class="flex height-100p flex-ai-c">Logout</a></li>
 					</c:if>
 					<c:if test="${isLogined == false}">

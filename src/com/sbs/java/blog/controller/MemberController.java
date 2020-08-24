@@ -55,7 +55,9 @@ public class MemberController extends Controller {
 	private String doActionDoLogout() {
 		session.removeAttribute("loginedMemberId");
 
-		return String.format("html:<script> alert('로그아웃 되었습니다.'); location.replace('../home/main'); </script>");
+		String redirectUrl = Util.getString(req, "redirectUrl", "../home/main");
+
+		return String.format("html:<script> alert('로그아웃 되었습니다.'); location.replace('" + redirectUrl + "'); </script>");
 	}
 
 	private String doActionDoJoin() {
