@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	id="WebApp_ID" version="4.0">
+
+	<context-param>
+		<param-name>gmailId</param-name>
+		<param-value>shko940575@gmail.com</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>gmailPw</param-name>
+		<param-value>앱 비밀번호로 교체</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+
+		<servlet-class>com.sbs.java.blog.servlet.DispatcherServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/s/*</url-pattern>
+	</servlet-mapping>
+
+</web-app>
