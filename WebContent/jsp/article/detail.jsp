@@ -101,7 +101,7 @@
 			<input type="hidden" name="articleId" value="${article.id}">
 
 			<c:set var="redirectUri"
-				value="${Util.getNewUriRemoved(currentUri, 'generatedArticleReplyId')}" />
+				value="${Util.getNewUriRemoved(currentUri, 'lastWorkArticleReplyId')}" />
 			<c:set var="redirectUri"
 				value="${Util.getNewUri(redirectUri, 'jsAction', 'WriteReplyList__showDetail')}" />
 
@@ -133,7 +133,7 @@
 	function WriteReplyList__showDetail() {
 		WriteReplyList__showTop();
 		var $tr = $('.article-replies-list-box > table > tbody > tr[data-id="'
-				+ param.generatedArticleReplyId + '"]');
+				+ param.lastWorkArticleReplyId + '"]');
 		$tr.addClass('high');
 		setTimeout(function() {
 			$tr.removeClass('high');
@@ -180,12 +180,12 @@
 					<td class="text-align-center"><c:if
 							test="${articleReply.extra.deleteAvailable}">
 							<c:set var="afterDeleteReplyRedirectUri"
-								value="${Util.getNewUriRemoved(currentUri, 'generatedArticleReplyId')}" />
+								value="${Util.getNewUriRemoved(currentUri, 'lastWorkArticleReplyId')}" />
 							<c:set var="afterDeleteReplyRedirectUri"
 								value="${Util.getNewUriAndEncoded(afterDeleteReplyRedirectUri, 'jsAction', 'WriteReplyList__showTop')}" />
 
 							<c:set var="afterModifyReplyRedirectUri"
-								value="${Util.getNewUriRemoved(currentUri, 'generatedArticleReplyId')}" />
+								value="${Util.getNewUriRemoved(currentUri, 'lastWorkArticleReplyId')}" />
 							<c:set var="afterModifyReplyRedirectUri"
 								value="${Util.getNewUriAndEncoded(afterModifyReplyRedirectUri, 'jsAction', 'WriteReplyList__showDetail')}" />
 

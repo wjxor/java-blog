@@ -30,6 +30,10 @@ public class ArticleController extends Controller {
 			return doActionList();
 		case "modify":
 			return doActionModify();
+		case "doModifyReply":
+			return doActionDoModifyReply();
+		case "modifyReply":
+			return doActionModifyReply();
 		case "detail":
 			return doActionDetail();
 		case "doWrite":
@@ -49,6 +53,37 @@ public class ArticleController extends Controller {
 		return "";
 	}
 
+	private String doActionDoModifyReply() {
+		if (Util.empty(req, "id")) {
+			return "html:id를 입력해주세요.";
+		}
+
+		if (Util.isNum(req, "id") == false) {
+			return "html:id를 정수로 입력해주세요.";
+		}
+
+		int id = Util.getInt(req, "id");
+		String body = Util.getString(req, "body");
+
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+
+		Map<String, Object> getReplyCheckRsModifyAvailableRs = articleService.getReplyCheckRsModifyAvailable(id,
+				loginedMemberId);
+
+		if (Util.isSuccess(getReplyCheckRsModifyAvailableRs) == false) {
+			return "html:<script> alert('" + getReplyCheckRsModifyAvailableRs.get("msg")
+					+ "'); history.back(); </script>";
+		}
+
+		articleService.modifyArticleReply(id, body);
+
+		String redirectUri = Util.getString(req, "redirectUri", "list");
+
+		redirectUri = Util.getNewUri(redirectUri, "lastWorkArticleReplyId", id + "");
+
+		return "html:<script> alert('" + id + "번 댓글이 수정되었습니다.'); location.replace('" + redirectUri + "'); </script>";
+	}
+
 	private String doActionDoWriteReply() {
 		if (Util.empty(req, "articleId")) {
 			return "html:articleId를 입력해주세요.";
@@ -66,7 +101,7 @@ public class ArticleController extends Controller {
 
 		int id = articleService.writeArticleReply(articleId, loginedMemberId, body);
 
-		redirectUri = Util.getNewUri(redirectUri, "generatedArticleReplyId", id + "");
+		redirectUri = Util.getNewUri(redirectUri, "lastWorkArticleReplyId", id + "");
 
 		return "html:<script> alert('" + id + "번 댓글이 작성되었습니다.'); location.replace('" + redirectUri + "'); </script>";
 	}
@@ -202,14 +237,34 @@ public class ArticleController extends Controller {
 
 		int id = Util.getInt(req, "id");
 
-		articleService.increaseHit(id);
-
 		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
 		Article article = articleService.getForPrintArticle(id, loginedMemberId);
 
 		req.setAttribute("article", article);
 
 		return "article/modify.jsp";
+	}
+
+	private String doActionModifyReply() {
+		if (Util.empty(req, "id")) {
+			return "html:id를 입력해주세요.";
+		}
+
+		if (Util.isNum(req, "id") == false) {
+			return "html:id를 정수로 입력해주세요.";
+		}
+
+		int id = Util.getInt(req, "id");
+
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+
+		ArticleReply articleReply = articleService.getArticleReply(id);
+		req.setAttribute("articleReply", articleReply);
+
+		Article article = articleService.getForPrintArticle(articleReply.getArticleId(), loginedMemberId);
+		req.setAttribute("article", article);
+
+		return "article/modifyReply.jsp";
 	}
 
 	private String doActionList() {

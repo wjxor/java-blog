@@ -2,7 +2,12 @@ package com.sbs.java.blog.dto;
 
 import java.util.Map;
 
+/**
+ * @author SBS-
+ *
+ */
 public class ArticleReply extends Dto {
+	private int articleId;
 	private String updateDate;
 	private int memberId;
 	private String body;
@@ -10,6 +15,7 @@ public class ArticleReply extends Dto {
 	public ArticleReply(Map<String, Object> row) {
 		super(row);
 
+		this.articleId = (int) row.get("articleId");
 		this.updateDate = (String) row.get("updateDate");
 		this.memberId = (int) row.get("memberId");
 		this.body = (String) row.get("body");
@@ -17,12 +23,17 @@ public class ArticleReply extends Dto {
 
 	@Override
 	public String toString() {
-		return "ArticleReply [updateDate=" + updateDate + ", memberId=" + memberId + ", body=" + body + ", getId()="
-				+ getId() + ", getRegDate()=" + getRegDate() + ", getExtra()=" + getExtra() + "]";
+		return "ArticleReply [articleId=" + articleId + ", updateDate=" + updateDate + ", memberId=" + memberId
+				+ ", body=" + body + ", getId()=" + getId() + ", getRegDate()=" + getRegDate() + ", getExtra()="
+				+ getExtra() + "]";
 	}
 
-	public String getBodyForXTemplate() {
-		return body.replaceAll("(?i)script", "<!--REPLACE:script-->");
+	public int getArticleId() {
+		return articleId;
+	}
+
+	public void setArticleId(int articleId) {
+		this.articleId = articleId;
 	}
 
 	public String getUpdateDate() {
@@ -47,6 +58,10 @@ public class ArticleReply extends Dto {
 
 	public void setBody(String body) {
 		this.body = body;
+	}
+
+	public String getBodyForXTemplate() {
+		return body.replaceAll("(?i)script", "<!--REPLACE:script-->");
 	}
 
 }
