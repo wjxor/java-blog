@@ -51,6 +51,16 @@ public class ArticleService extends Service {
 		return getReplyCheckRsDeleteAvailable(articleReply, actorId);
 	}
 
+	public Map<String, Object> getReplyCheckRsDeleteAvailable(int id, int actorId) {
+		ArticleReply articleReply = this.getArticleReply(id);
+
+		return getReplyCheckRsDeleteAvailable(articleReply, actorId);
+	}
+
+	private ArticleReply getArticleReply(int id) {
+		return articleDao.getArticleReply(id);
+	}
+
 	private Map<String, Object> getReplyCheckRsDeleteAvailable(ArticleReply articleReply, int actorId) {
 		Map<String, Object> rs = new HashMap<>();
 
@@ -159,6 +169,10 @@ public class ArticleService extends Service {
 		}
 
 		return articleReplies;
+	}
+
+	public int deleteArticleReply(int id) {
+		return articleDao.deleteArticleReply(id);
 	}
 
 }

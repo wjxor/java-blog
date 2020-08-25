@@ -67,7 +67,7 @@ public class ArticleDao extends Dao {
 	public Article getForPrintArticle(int id) {
 		SecSql sql = new SecSql();
 
-		sql.append("SELECT *, '장희성' AS extra__writer ");
+		sql.append("SELECT *, 'wjxor' AS extra__writer ");
 		sql.append("FROM article ");
 		sql.append("WHERE 1 ");
 		sql.append("AND id = ? ", id);
@@ -179,5 +179,28 @@ public class ArticleDao extends Dao {
 		}
 
 		return articleReplies;
+	}
+
+	public ArticleReply getArticleReply(int id) {
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT *");
+		sql.append("FROM articleReply");
+		sql.append("WHERE id = ?", id);
+
+		Map<String, Object> row = DBUtil.selectRow(dbConn, sql);
+
+		if (row.isEmpty()) {
+			return null;
+		}
+
+		return new ArticleReply(row);
+	}
+
+	public int deleteArticleReply(int id) {
+		SecSql sql = SecSql.from("DELETE FROM articleReply");
+		sql.append("WHERE id = ?", id);
+
+		return DBUtil.delete(dbConn, sql);
 	}
 }

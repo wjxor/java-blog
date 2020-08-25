@@ -3,7 +3,6 @@ package com.sbs.java.blog.util;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.sql.SQLException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -100,17 +99,47 @@ public class Util {
 		return ((String) rs.get("resultCode")).startsWith("S-");
 	}
 
-	public static String adParamFrom(String redirectUrl, String paramName, int paramValue) {
-		return adParamFrom(redirectUrl, paramName, paramValue + "");
-	}
+	public static String getNewUrlRemoved(String url, String paramName) {
+		String deleteStrStarts = paramName + "=";
+		int delStartPos = url.indexOf(deleteStrStarts);
 
-	public static String adParamFrom(String redirectUrl, String paramName, String paramValue) {
-		if (redirectUrl.contains("?") == false) {
-			redirectUrl += "?dummy=dummy";
+		if (delStartPos != -1) {
+			int delEndPos = url.indexOf("&", delStartPos);
+
+			if (delEndPos != -1) {
+				delEndPos++;
+				url = url.substring(0, delStartPos) + url.substring(delEndPos, url.length());
+			} else {
+				url = url.substring(0, delStartPos);
+			}
 		}
 
-		redirectUrl += "&" + paramName + "=" + paramValue;
+		if (url.charAt(url.length() - 1) == '?') {
+			url = url.substring(0, url.length() - 1);
+		}
 
-		return redirectUrl;
+		if (url.charAt(url.length() - 1) == '&') {
+			url = url.substring(0, url.length() - 1);
+		}
+
+		return url;
+	}
+
+	public static String getNewUrl(String url, String paramName, String paramValue) {
+		url = getNewUrlRemoved(url, paramName);
+
+		if (url.contains("?")) {
+			url += "&" + paramName + "=" + paramValue;
+		} else {
+			url += "?" + paramName + "=" + paramValue;
+		}
+
+		url = url.replace("?&", "?");
+
+		return url;
+	}
+
+	public static String getNewUrlAndEncoded(String url, String paramName, String pramValue) {
+		return getUrlEncoded(getNewUrl(url, paramName, pramValue));
 	}
 }
