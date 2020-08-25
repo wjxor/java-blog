@@ -7,9 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sbs.java.blog.config.Config;
 import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.dto.Member;
 import com.sbs.java.blog.service.ArticleService;
+import com.sbs.java.blog.service.MailService;
 import com.sbs.java.blog.service.MemberService;
 import com.sbs.java.blog.util.Util;
 
@@ -22,6 +24,7 @@ public abstract class Controller {
 
 	protected ArticleService articleService;
 	protected MemberService memberService;
+	protected MailService mailService;
 
 	public Controller(Connection dbConn, String actionMethodName, HttpServletRequest req, HttpServletResponse resp) {
 		this.dbConn = dbConn;
@@ -31,6 +34,7 @@ public abstract class Controller {
 		this.resp = resp;
 		articleService = new ArticleService(dbConn);
 		memberService = new MemberService(dbConn);
+		mailService = new MailService(Config.gmailId, Config.gmailPw, Config.mailFrom, Config.mailFromName);
 	}
 
 	public abstract String getControllerName();

@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sbs.java.blog.config.Config;
 import com.sbs.java.blog.controller.ArticleController;
 import com.sbs.java.blog.controller.Controller;
 import com.sbs.java.blog.controller.HomeController;
@@ -45,6 +46,16 @@ public class App {
 	}
 
 	public void start() throws ServletException, IOException {
+		// Config 구성
+
+		if (req.getServletContext().getInitParameter("gmailId") != null) {
+			Config.gmailId = (String) req.getServletContext().getInitParameter("gmailId");
+		}
+
+		if (req.getServletContext().getInitParameter("gmailPw") != null) {
+			Config.gmailPw = (String) req.getServletContext().getInitParameter("gmailPw");
+		}
+
 		// DB 드라이버 로딩
 		loadDbDriver();
 
