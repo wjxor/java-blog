@@ -5,17 +5,17 @@ String.prototype.replaceAll = function(org, dest) {
 	return this.split(org).join(dest);
 }
 
-function getUrlParams(url) {
-	url = url.trim();
-	url = url.replaceAll('&amp;', '&');
-	if (url.indexOf('#') !== -1) {
-		var pos = url.indexOf('#');
-		url = url.substr(0, pos);
+function getUriParams(uri) {
+	uri = uri.trim();
+	uri = uri.replaceAll('&amp;', '&');
+	if (uri.indexOf('#') !== -1) {
+		var pos = uri.indexOf('#');
+		uri = uri.substr(0, pos);
 	}
 
 	var params = {};
 
-	url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) {
+	uri.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) {
 		params[key] = value;
 	});
 	return params;
@@ -63,41 +63,41 @@ function youtubePlugin() {
 function renderYoutube(wrapperId, youtubeId) {
 	const el = document.querySelector('#' + wrapperId);
 
-	var urlParams = getUrlParams(youtubeId);
+	var uriParams = getUriParams(youtubeId);
 
 	var width = '100%';
 	var height = '100%';
 
-	if (urlParams.width) {
-		width = urlParams.width;
+	if (uriParams.width) {
+		width = uriParams.width;
 	}
 
-	if (urlParams.height) {
-		height = urlParams.height;
+	if (uriParams.height) {
+		height = uriParams.height;
 	}
 
 	var maxWidth = 500;
 
-	if (urlParams['max-width']) {
-		maxWidth = urlParams['max-width'];
+	if (uriParams['max-width']) {
+		maxWidth = uriParams['max-width'];
 	}
 
 	var ratio = '16-9';
 
-	if (urlParams['ratio']) {
-		ratio = urlParams['ratio'];
+	if (uriParams['ratio']) {
+		ratio = uriParams['ratio'];
 	}
 
 	var marginLeft = 'auto';
 
-	if (urlParams['margin-left']) {
-		marginLeft = urlParams['margin-left'];
+	if (uriParams['margin-left']) {
+		marginLeft = uriParams['margin-left'];
 	}
 
 	var marginRight = 'auto';
 
-	if (urlParams['margin-right']) {
-		marginRight = urlParams['margin-right'];
+	if (uriParams['margin-right']) {
+		marginRight = uriParams['margin-right'];
 	}
 
 	if (youtubeId.indexOf('?') !== -1) {
@@ -125,46 +125,46 @@ function renderYoutube(wrapperId, youtubeId) {
 
 // repl 플러그인 시작
 function replPlugin() {
-	toastui.Editor.codeBlockManager.setReplacer("repl", function(replUrl) {
+	toastui.Editor.codeBlockManager.setReplacer("repl", function(replUri) {
 		var postSharp = "";
-		if (replUrl.indexOf('#') !== -1) {
-			var pos = replUrl.indexOf('#');
-			postSharp = replUrl.substr(pos);
-			replUrl = replUrl.substr(0, pos);
+		if (replUri.indexOf('#') !== -1) {
+			var pos = replUri.indexOf('#');
+			postSharp = replUri.substr(pos);
+			replUri = replUri.substr(0, pos);
 		}
 
-		if (replUrl.indexOf('?') === -1) {
-			replUrl += "?dummy=1";
+		if (replUri.indexOf('?') === -1) {
+			replUri += "?dummy=1";
 		}
 
-		replUrl += "&lite=true";
-		replUrl += postSharp;
+		replUri += "&lite=true";
+		replUri += postSharp;
 
 		// Indentify multiple code blocks
 		const wrapperId = `yt${Math.random().toString(36).substr(2, 10)}`;
 
 		// Avoid sanitizing iframe tag
-		setTimeout(renderRepl.bind(null, wrapperId, replUrl), 0);
+		setTimeout(renderRepl.bind(null, wrapperId, replUri), 0);
 
 		return "<div id=\"" + wrapperId + "\"></div>";
 	});
 }
 
-function renderRepl(wrapperId, replUrl) {
+function renderRepl(wrapperId, replUri) {
 	const el = document.querySelector(`#${wrapperId}`);
 
-	var urlParams = getUrlParams(replUrl);
+	var uriParams = getUriParams(replUri);
 
 	var height = 400;
 
-	if (urlParams.height) {
-		height = urlParams.height;
+	if (uriParams.height) {
+		height = uriParams.height;
 	}
 
 	el.innerHTML = '<iframe height="'
 			+ height
 			+ 'px" width="100%" src="'
-			+ replUrl
+			+ replUri
 			+ '" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>';
 }
 // repl 플러그인 끝
@@ -174,42 +174,42 @@ function codepenPlugin() {
 	toastui.Editor.codeBlockManager
 			.setReplacer(
 					"codepen",
-					function(codepenUrl) {
+					function(codepenUri) {
 						// Indentify multiple code blocks
 						const wrapperId = `yt${Math.random().toString(36).substr(2, 10)}`;
 
 						// Avoid sanitizing iframe tag
 						setTimeout(renderCodepen.bind(null, wrapperId,
-								codepenUrl), 0);
+								codepenUri), 0);
 
 						return '<div id="' + wrapperId + '"></div>';
 					});
 }
 
-function renderCodepen(wrapperId, codepenUrl) {
+function renderCodepen(wrapperId, codepenUri) {
 	const el = document.querySelector(`#${wrapperId}`);
 
-	var urlParams = getUrlParams(codepenUrl);
+	var uriParams = getUriParams(codepenUri);
 
 	var height = 400;
 
-	if (urlParams.height) {
-		height = urlParams.height;
+	if (uriParams.height) {
+		height = uriParams.height;
 	}
 
 	var width = '100%';
 
-	if (urlParams.width) {
-		width = urlParams.width;
+	if (uriParams.width) {
+		width = uriParams.width;
 	}
 
 	if (!isNaN(width)) {
 		width += 'px';
 	}
 
-	if (codepenUrl.indexOf('#') !== -1) {
-		var pos = codepenUrl.indexOf('#');
-		codepenUrl = codepenUrl.substr(0, pos);
+	if (codepenUri.indexOf('#') !== -1) {
+		var pos = codepenUri.indexOf('#');
+		codepenUri = codepenUri.substr(0, pos);
 	}
 
 	el.innerHTML = '<iframe height="'
@@ -217,7 +217,7 @@ function renderCodepen(wrapperId, codepenUrl) {
 			+ '" style="width: '
 			+ width
 			+ ';" scrolling="no" title="" src="'
-			+ codepenUrl
+			+ codepenUri
 			+ '" frameborder="no" allowtransparency="true" allowfullscreen="true"></iframe>';
 }
 // repl 플러그인 끝
@@ -227,17 +227,17 @@ String.prototype.replaceAll = function(org, dest) {
 	return this.split(org).join(dest);
 }
 
-function getUrlParams(url) {
-	url = url.trim();
-	url = url.replaceAll('&amp;', '&');
-	if (url.indexOf('#') !== -1) {
-		var pos = url.indexOf('#');
-		url = url.substr(0, pos);
+function getUriParams(uri) {
+	uri = uri.trim();
+	uri = uri.replaceAll('&amp;', '&');
+	if (uri.indexOf('#') !== -1) {
+		var pos = uri.indexOf('#');
+		uri = uri.substr(0, pos);
 	}
 
 	var params = {};
 
-	url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) {
+	uri.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) {
 		params[key] = value;
 	});
 	return params;

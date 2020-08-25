@@ -40,7 +40,7 @@ public class App {
 		// DB 커넥터 로딩 성공
 	}
 
-	private String getDbUrl() {
+	private String getDbUri() {
 		return "jdbc:mysql://localhost:3306/BD?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull";
 	}
 
@@ -49,7 +49,7 @@ public class App {
 		loadDbDriver();
 
 		// DB 접속정보 세팅
-		String url = getDbUrl();
+		String uri = getDbUri();
 		String user = getDbId();
 		String password = getDbPassword();
 
@@ -57,7 +57,7 @@ public class App {
 
 		try {
 			// DB 접속 성공
-			dbConn = DriverManager.getConnection(url, user, password);
+			dbConn = DriverManager.getConnection(uri, user, password);
 
 			// 올바른 컨트롤러로 라우팅
 			route(dbConn, req, resp);

@@ -75,7 +75,7 @@ public class Util {
 		return req.getParameter(paramName);
 	}
 
-	public static String getUrlEncoded(String str) {
+	public static String getUriEncoded(String str) {
 		try {
 			return URLEncoder.encode(str, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -99,47 +99,47 @@ public class Util {
 		return ((String) rs.get("resultCode")).startsWith("S-");
 	}
 
-	public static String getNewUrlRemoved(String url, String paramName) {
+	public static String getNewUriRemoved(String uri, String paramName) {
 		String deleteStrStarts = paramName + "=";
-		int delStartPos = url.indexOf(deleteStrStarts);
+		int delStartPos = uri.indexOf(deleteStrStarts);
 
 		if (delStartPos != -1) {
-			int delEndPos = url.indexOf("&", delStartPos);
+			int delEndPos = uri.indexOf("&", delStartPos);
 
 			if (delEndPos != -1) {
 				delEndPos++;
-				url = url.substring(0, delStartPos) + url.substring(delEndPos, url.length());
+				uri = uri.substring(0, delStartPos) + uri.substring(delEndPos, uri.length());
 			} else {
-				url = url.substring(0, delStartPos);
+				uri = uri.substring(0, delStartPos);
 			}
 		}
 
-		if (url.charAt(url.length() - 1) == '?') {
-			url = url.substring(0, url.length() - 1);
+		if (uri.charAt(uri.length() - 1) == '?') {
+			uri = uri.substring(0, uri.length() - 1);
 		}
 
-		if (url.charAt(url.length() - 1) == '&') {
-			url = url.substring(0, url.length() - 1);
+		if (uri.charAt(uri.length() - 1) == '&') {
+			uri = uri.substring(0, uri.length() - 1);
 		}
 
-		return url;
+		return uri;
 	}
 
-	public static String getNewUrl(String url, String paramName, String paramValue) {
-		url = getNewUrlRemoved(url, paramName);
+	public static String getNewUri(String uri, String paramName, String paramValue) {
+		uri = getNewUriRemoved(uri, paramName);
 
-		if (url.contains("?")) {
-			url += "&" + paramName + "=" + paramValue;
+		if (uri.contains("?")) {
+			uri += "&" + paramName + "=" + paramValue;
 		} else {
-			url += "?" + paramName + "=" + paramValue;
+			uri += "?" + paramName + "=" + paramValue;
 		}
 
-		url = url.replace("?&", "?");
+		uri = uri.replace("?&", "?");
 
-		return url;
+		return uri;
 	}
 
-	public static String getNewUrlAndEncoded(String url, String paramName, String pramValue) {
-		return getUrlEncoded(getNewUrl(url, paramName, pramValue));
+	public static String getNewUriAndEncoded(String uri, String paramName, String pramValue) {
+		return getUriEncoded(getNewUri(uri, paramName, pramValue));
 	}
 }

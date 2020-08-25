@@ -50,12 +50,9 @@
 
 <c:if test="${isLogined == false}">
 	<div class="con">
-
-		<c:url value="/s/member/login" var="loginUrl">
-			<c:param name="afterLoginRedirectUrl"
-				value="${currentUrl}&jsAction=WriteReplyForm__focus" />
-		</c:url>
-		<a href="${loginUrl}">로그인</a> 후 이용해주세요.
+		<c:set var="loginUri"
+			value="../member/login?afterLoginRedirectUri=${Util.getNewUriAndEncoded(currentUri, 'jsAction', 'WriteReplyForm__focus')}" />
+		<a href="${loginUri}">로그인</a> 후 이용해주세요.
 	</div>
 </c:if>
 <c:if test="${isLogined}">
@@ -103,12 +100,12 @@
 			onsubmit="WriteReplyForm__submit(this); return false;">
 			<input type="hidden" name="articleId" value="${article.id}">
 
-			<c:set var="redirectUrl"
-				value="${Util.getNewUrlRemoved(currentUrl, 'generatedArticleReplyId')}" />
-			<c:set var="redirectUrl"
-				value="${Util.getNewUrl(redirectUrl, 'jsAction', 'WriteReplyList__showDetail')}" />
+			<c:set var="redirectUri"
+				value="${Util.getNewUriRemoved(currentUri, 'generatedArticleReplyId')}" />
+			<c:set var="redirectUri"
+				value="${Util.getNewUri(redirectUri, 'jsAction', 'WriteReplyList__showDetail')}" />
 
-			<input type="hidden" name="redirectUrl" value="${redirectUrl}">
+			<input type="hidden" name="redirectUri" value="${redirectUri}">
 			<input type="hidden" name="body">
 			<div class="form-row">
 				<div class="label">내용</div>
@@ -182,21 +179,21 @@
 						<div class="toast-editor toast-editor-viewer"></div></td>
 					<td class="text-align-center"><c:if
 							test="${articleReply.extra.deleteAvailable}">
-							<c:set var="afterDeleteReplyRedirectUrl"
-								value="${Util.getNewUrlRemoved(currentUrl, 'generatedArticleReplyId')}" />
-							<c:set var="afterDeleteReplyRedirectUrl"
-								value="${Util.getNewUrlAndEncoded(afterDeleteReplyRedirectUrl, 'jsAction', 'WriteReplyList__showTop')}" />
+							<c:set var="afterDeleteReplyRedirectUri"
+								value="${Util.getNewUriRemoved(currentUri, 'generatedArticleReplyId')}" />
+							<c:set var="afterDeleteReplyRedirectUri"
+								value="${Util.getNewUriAndEncoded(afterDeleteReplyRedirectUri, 'jsAction', 'WriteReplyList__showTop')}" />
 
-							<c:set var="afterModifyReplyRedirectUrl"
-								value="${Util.getNewUrlRemoved(currentUrl, 'generatedArticleReplyId')}" />
-							<c:set var="afterModifyReplyRedirectUrl"
-								value="${Util.getNewUrlAndEncoded(afterModifyReplyRedirectUrl, 'jsAction', 'WriteReplyList__showDetail')}" />
+							<c:set var="afterModifyReplyRedirectUri"
+								value="${Util.getNewUriRemoved(currentUri, 'generatedArticleReplyId')}" />
+							<c:set var="afterModifyReplyRedirectUri"
+								value="${Util.getNewUriAndEncoded(afterModifyReplyRedirectUri, 'jsAction', 'WriteReplyList__showDetail')}" />
 
 							<a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;"
-								href="./doDeleteReply?id=${articleReply.id}&redirectUrl=${afterDeleteReplyRedirectUrl}">삭제</a>
+								href="./doDeleteReply?id=${articleReply.id}&redirectUri=${afterDeleteReplyRedirectUri}">삭제</a>
 						</c:if> <c:if test="${articleReply.extra.modifyAvailable}">
 							<a
-								href="./modifyReply?id=${articleReply.id}&redirectUrl=${afterModifyReplyRedirectUrl}">수정</a>
+								href="./modifyReply?id=${articleReply.id}&redirectUri=${afterModifyReplyRedirectUri}">수정</a>
 						</c:if></td>
 				</tr>
 			</c:forEach>
