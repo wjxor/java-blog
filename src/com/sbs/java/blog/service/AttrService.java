@@ -14,18 +14,42 @@ public class AttrService extends Service {
 	}
 
 	public Attr get(String name) {
-		return attrDao.get(name);
+		String[] nameBits = name.split("__");
+		String relTypeCode = nameBits[0];
+		int relId = Integer.parseInt(nameBits[1]);
+		String typeCode = nameBits[2];
+		String type2Code = nameBits[3];
+
+		return attrDao.get(relTypeCode, relId, typeCode, type2Code);
 	}
 
 	public int setValue(String name, String value) {
-		return attrDao.setValue(name, value);
+		String[] nameBits = name.split("__");
+		String relTypeCode = nameBits[0];
+		int relId = Integer.parseInt(nameBits[1]);
+		String typeCode = nameBits[2];
+		String type2Code = nameBits[3];
+
+		return attrDao.setValue(relTypeCode, relId, typeCode, type2Code, value);
 	}
 
 	public String getValue(String name) {
-		return attrDao.getValue(name);
+		String[] nameBits = name.split("__");
+		String relTypeCode = nameBits[0];
+		int relId = Integer.parseInt(nameBits[1]);
+		String typeCode = nameBits[2];
+		String type2Code = nameBits[3];
+
+		return attrDao.getValue(relTypeCode, relId, typeCode, type2Code);
 	}
 
 	public int remove(String name) {
-		return attrDao.remove(name);
+		String[] nameBits = name.split("__");
+		String relTypeCode = nameBits[0];
+		int relId = Integer.parseInt(nameBits[1]);
+		String typeCode = nameBits[2];
+		String type2Code = nameBits[3];
+
+		return attrDao.remove(relTypeCode, relId, typeCode, type2Code);
 	}
 }

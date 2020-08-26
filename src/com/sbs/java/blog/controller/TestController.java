@@ -36,16 +36,16 @@ public class TestController extends Controller {
 	}
 
 	private String doActionAttr() {
-		attrService.setValue("member__1__tempPasswordExpireDate", "2020-07-02 12:12:12");
-		String tempPasswordExpireDate = attrService.getValue("member__1__tempPasswordExpireDate");
-		attrService.remove("member__1__tempPasswordExpireDate");
+		attrService.setValue("member__1__common__tempPasswordExpireDate", "2020-07-02 12:12:12");
+		String tempPasswordExpireDate = attrService.getValue("member__1__common__tempPasswordExpireDate");
+		attrService.remove("member__1__common__tempPasswordExpireDate");
 		return "html:" + tempPasswordExpireDate;
 	}
 
 	private String doActionAttr2() {
-		attrService.setValue("member__1__tempPasswordExpireDate", "2020-07-02 12:12:12");
-		Attr tempPasswordExpireDateAttr = attrService.get("member__1__tempPasswordExpireDate");
-		attrService.remove("member__1__tempPasswordExpireDate");
+		attrService.setValue("member__1__extra__tempPasswordExpireDate", "2020-07-02 12:12:12");
+		Attr tempPasswordExpireDateAttr = attrService.get("member__1__extra__tempPasswordExpireDate");
+		attrService.remove("member__1__extra__tempPasswordExpireDate");
 		return "html:" + tempPasswordExpireDateAttr.getId();
 	}
 
