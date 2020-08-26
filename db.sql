@@ -133,3 +133,17 @@ ALTER TABLE articleReply ADD COLUMN articleId INT(10) UNSIGNED NOT NULL DEFAULT 
 UPDATE articleReply
 SET articleId = 1
 WHERE articleId = 0;
+
+# 부가정보테이블 
+# 댓글 테이블 추가
+DROP TABLE IF EXISTS attr;
+CREATE TABLE attr (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    `name` CHAR(100) NOT NULL UNIQUE,
+    `value` TEXT NOT NULL
+);
+
+# updateDate 칼럼 추가
+ALTER TABLE `cateItem` ADD COLUMN `updateDate` DATETIME NOT NULL AFTER `regDate`; 

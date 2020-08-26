@@ -3,7 +3,6 @@ package com.sbs.java.blog.dto;
 import java.util.Map;
 
 public class Member extends Dto {
-	private String updateDate;
 	private String loginId;
 	private String loginPw;
 	private String name;
@@ -13,20 +12,11 @@ public class Member extends Dto {
 	public Member(Map<String, Object> row) {
 		super(row);
 
-		this.updateDate = (String) row.get("updateDate");
 		this.loginId = (String) row.get("loginId");
 		this.loginPw = (String) row.get("loginPw");
 		this.name = (String) row.get("name");
 		this.nickname = (String) row.get("nickname");
 		this.email = (String) row.get("email");
-	}
-
-	public String getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(String updateDate) {
-		this.updateDate = updateDate;
 	}
 
 	public String getLoginId() {
@@ -71,9 +61,9 @@ public class Member extends Dto {
 
 	@Override
 	public String toString() {
-		return "Member [updateDate=" + updateDate + ", loginId=" + loginId + ", loginPw=" + loginPw + ", name=" + name
-				+ ", nickname=" + nickname + ", email=" + email + ", getId()=" + getId() + ", getRegDate()="
-				+ getRegDate() + ", getExtra()=" + getExtra() + "]";
+		return "Member [loginId=" + loginId + ", loginPw=" + loginPw + ", name=" + name + ", nickname=" + nickname
+				+ ", email=" + email + ", getId()=" + getId() + ", getRegDate()=" + getRegDate() + ", getUpdateDate()="
+				+ getUpdateDate() + ", getExtra()=" + getExtra() + "]";
 	}
 
 }

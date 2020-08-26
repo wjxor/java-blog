@@ -8,7 +8,6 @@ import java.util.Map;
  */
 public class ArticleReply extends Dto {
 	private int articleId;
-	private String updateDate;
 	private int memberId;
 	private String body;
 
@@ -16,16 +15,8 @@ public class ArticleReply extends Dto {
 		super(row);
 
 		this.articleId = (int) row.get("articleId");
-		this.updateDate = (String) row.get("updateDate");
 		this.memberId = (int) row.get("memberId");
 		this.body = (String) row.get("body");
-	}
-
-	@Override
-	public String toString() {
-		return "ArticleReply [articleId=" + articleId + ", updateDate=" + updateDate + ", memberId=" + memberId
-				+ ", body=" + body + ", getId()=" + getId() + ", getRegDate()=" + getRegDate() + ", getExtra()="
-				+ getExtra() + "]";
 	}
 
 	public int getArticleId() {
@@ -34,14 +25,6 @@ public class ArticleReply extends Dto {
 
 	public void setArticleId(int articleId) {
 		this.articleId = articleId;
-	}
-
-	public String getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(String updateDate) {
-		this.updateDate = updateDate;
 	}
 
 	public int getMemberId() {
@@ -58,6 +41,13 @@ public class ArticleReply extends Dto {
 
 	public void setBody(String body) {
 		this.body = body;
+	}
+
+	@Override
+	public String toString() {
+		return "ArticleReply [articleId=" + articleId + ", memberId=" + memberId + ", body=" + body + ", getId()="
+				+ getId() + ", getRegDate()=" + getRegDate() + ", getUpdateDate()=" + getUpdateDate() + ", getExtra()="
+				+ getExtra() + "]";
 	}
 
 	public String getBodyForXTemplate() {

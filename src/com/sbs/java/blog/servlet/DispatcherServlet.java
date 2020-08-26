@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.app.App;
 
+@WebServlet("/s/*")
 public class DispatcherServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
