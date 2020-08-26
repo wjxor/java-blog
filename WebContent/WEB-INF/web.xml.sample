@@ -5,24 +5,8 @@
 	id="WebApp_ID" version="4.0">
 
 	<context-param>
-		<param-name>gmailId</param-name>
-		<param-value>jangka512@gmail.com</param-value>
-	</context-param>
-
-	<context-param>
 		<param-name>gmailPw</param-name>
-		<param-value>앱 비밀번호로 교체</param-value>
+		<param-value>앱 비밀번호</param-value>
 	</context-param>
-
-	<servlet>
-		<servlet-name>dispatcher</servlet-name>
-
-		<servlet-class>com.sbs.java.blog.servlet.DispatcherServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>/s/*</url-pattern>
-	</servlet-mapping>
 
 </web-app>
