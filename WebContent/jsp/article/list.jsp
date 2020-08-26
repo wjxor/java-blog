@@ -64,6 +64,7 @@
 			<col width="100">
 			<col width="200">
 			<col width="120">
+			<col width="120">
 			<col>
 			<col width="120">
 		</colgroup>
@@ -71,6 +72,7 @@
 			<tr>
 				<th>번호</th>
 				<th>날짜</th>
+				<th>작성자</th>
 				<th>카테고리 아이템</th>
 				<th>제목</th>
 				<th>비고</th>
@@ -82,6 +84,7 @@
 					<td class="text-align-center"><a
 						href="./detail?id=${article.id}">${article.id}</a></td>
 					<td class="text-align-center">${article.regDate}</td>
+					<td class="text-align-center">${article.extra.writer}</td>
 					<td class="text-align-center">${article.cateItemId}</td>
 					<td><a href="./detail?id=${article.id}">${article.title}</a></td>
 					<td><c:if test="${article.extra.deleteAvailable}">

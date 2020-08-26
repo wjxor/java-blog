@@ -21,41 +21,41 @@ public class TestController extends Controller {
 	public String doAction() {
 		switch (actionMethodName) {
 		case "dbInsert":
-			return doActionDbInsert();
+			return actionDbInsert();
 		case "dbSelect":
-			return doActionDbSelect();
+			return actionDbSelect();
 		case "sendMail":
-			return doActionSendMail();
+			return actionSendMail();
 		case "attr":
-			return doActionAttr();
+			return actionAttr();
 		case "attr2":
-			return doActionAttr2();
+			return actionAttr2();
 		}
 
 		return "";
 	}
 
-	private String doActionAttr() {
+	private String actionAttr() {
 		attrService.setValue("member__1__common__tempPasswordExpireDate", "2020-07-02 12:12:12");
 		String tempPasswordExpireDate = attrService.getValue("member__1__common__tempPasswordExpireDate");
 		attrService.remove("member__1__common__tempPasswordExpireDate");
 		return "html:" + tempPasswordExpireDate;
 	}
 
-	private String doActionAttr2() {
+	private String actionAttr2() {
 		attrService.setValue("member__1__extra__tempPasswordExpireDate", "2020-07-02 12:12:12");
 		Attr tempPasswordExpireDateAttr = attrService.get("member__1__extra__tempPasswordExpireDate");
 		attrService.remove("member__1__extra__tempPasswordExpireDate");
 		return "html:" + tempPasswordExpireDateAttr.getId();
 	}
 
-	private String doActionSendMail() {
+	private String actionSendMail() {
 		mailService.send("jangka512@gmail.com", "안녕하세요.!!!",
 				"<a href=\"https://www.naver.com\" target=\"_blank\">네이버!!!</a>반가워요 ^ ^");
 		return "html:성공";
 	}
 
-	private String doActionDbInsert() {
+	private String actionDbInsert() {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		int id = -1;
@@ -95,7 +95,7 @@ public class TestController extends Controller {
 		return "html:" + id;
 	}
 
-	private String doActionDbSelect() {
+	private String actionDbSelect() {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String title = null;

@@ -17,21 +17,21 @@ public class MemberController extends Controller {
 	public String doAction() {
 		switch (actionMethodName) {
 		case "join":
-			return doActionJoin();
+			return actionJoin();
 		case "doJoin":
-			return doActionDoJoin();
+			return actionDoJoin();
 		case "login":
-			return doActionLogin();
+			return actionLogin();
 		case "doLogin":
-			return doActionDoLogin();
+			return actionDoLogin();
 		case "doLogout":
-			return doActionDoLogout();
+			return actionDoLogout();
 		}
 
 		return "";
 	}
 
-	private String doActionDoLogin() {
+	private String actionDoLogin() {
 		String loginId = req.getParameter("loginId");
 		String loginPw = req.getParameter("loginPwReal");
 
@@ -48,11 +48,11 @@ public class MemberController extends Controller {
 		return String.format("html:<script> alert('로그인 되었습니다.'); location.replace('" + redirectUri + "'); </script>");
 	}
 
-	private String doActionLogin() {
+	private String actionLogin() {
 		return "member/login.jsp";
 	}
 
-	private String doActionDoLogout() {
+	private String actionDoLogout() {
 		session.removeAttribute("loginedMemberId");
 
 		String redirectUri = Util.getString(req, "redirectUri", "../home/main");
@@ -60,7 +60,7 @@ public class MemberController extends Controller {
 		return String.format("html:<script> alert('로그아웃 되었습니다.'); location.replace('" + redirectUri + "'); </script>");
 	}
 
-	private String doActionDoJoin() {
+	private String actionDoJoin() {
 
 		String loginId = req.getParameter("loginId");
 		String loginPw = req.getParameter("loginPwReal");
@@ -91,7 +91,7 @@ public class MemberController extends Controller {
 		return String.format("html:<script> alert('%s님 환영합니다.'); location.replace('../home/main'); </script>", name);
 	}
 
-	private String doActionJoin() {
+	private String actionJoin() {
 		return "member/join.jsp";
 	}
 
