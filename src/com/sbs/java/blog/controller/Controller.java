@@ -33,8 +33,8 @@ public abstract class Controller {
 		this.session = req.getSession();
 		this.resp = resp;
 		articleService = new ArticleService(dbConn);
-		memberService = new MemberService(dbConn);
 		mailService = new MailService(Config.gmailId, Config.gmailPw, Config.mailFrom, Config.mailFromName);
+		memberService = new MemberService(dbConn, mailService);
 	}
 
 	public abstract String getControllerName();
