@@ -22,6 +22,10 @@
 				<td>${article.regDate}</td>
 			</tr>
 			<tr>
+				<th>작성자</th>
+				<td>${article.extra.writer}</td>
+			</tr>
+			<tr>
 				<th>제목</th>
 				<td>${article.title}</td>
 			</tr>
@@ -165,6 +169,7 @@
 			<tr>
 				<th>번호</th>
 				<th>날짜</th>
+				<th>작성자</th>
 				<th>내용</th>
 				<th>비고</th>
 			</tr>
@@ -174,6 +179,7 @@
 				<tr data-id="${articleReply.id}">
 					<td class="text-align-center">${articleReply.id}</td>
 					<td class="text-align-center">${articleReply.regDate}</td>
+					<td class="text-align-center">${articleReply.extra.writer}</td>
 					<td class="padding-left-10 padding-right-10"><script
 							type="text/x-template">${articleReply.bodyForXTemplate}</script>
 						<div class="toast-editor toast-editor-viewer"></div></td>
