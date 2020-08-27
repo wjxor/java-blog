@@ -108,6 +108,9 @@
 					<li><a
 						href="${pageContext.request.contextPath}/s/member/doLogout?redirectUri=${encodedAfterLogoutRedirectUri}"
 						class="block">Logout</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/s/member/passwordForPrivate"
+						class="block">My Private</a></li>
 				</c:if>
 				<c:if test="${isLogined == false}">
 					<li><a
@@ -156,6 +159,9 @@
 						<li><a
 							href="${pageContext.request.contextPath}/s/member/doLogout?redirectUri=${encodedAfterLogoutRedirectUri}"
 							class="flex height-100p flex-ai-c">Logout</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/s/member/passwordForPrivate"
+							class="flex height-100p flex-ai-c">My Private</a></li>
 					</c:if>
 					<c:if test="${isLogined == false}">
 						<li><a
