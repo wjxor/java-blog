@@ -38,9 +38,41 @@ public class MemberController extends Controller {
 			return actionModifyPrivate();
 		case "doModifyPrivate":
 			return actionDoModifyPrivate();
+		case "findAccount":
+			return actionFindAccount();
+		case "doFindLoginId":
+			return actionDoFindLoginId();
+		case "doFindLoginPw":
+			return actionDoFindLoginPw();
 		}
 
 		return "";
+	}
+
+	private String actionDoFindLoginPw() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private String actionDoFindLoginId() {
+		String name = Util.getString(req, "name");
+		String email = Util.getString(req, "email");
+
+		Member member = memberService.getMemberByNameAndEmail(name, email);
+
+		if (member == null) {
+			req.setAttribute("jsAlertMsg", "일치하는 회원이 없습니다.");
+			req.setAttribute("jsHistoryBack", true);
+			return "common/data.jsp";
+		}
+
+		req.setAttribute("jsAlertMsg", "일치하는 회원을 찾았습니다.\\n아이디 : " + member.getLoginId());
+		req.setAttribute("jsHistoryBack", true);
+		return "common/data.jsp";
+	}
+
+	private String actionFindAccount() {
+		return "member/findAccount.jsp";
 	}
 
 	private String actionDoModifyPrivate() {

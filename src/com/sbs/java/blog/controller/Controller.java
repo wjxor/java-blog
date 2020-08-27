@@ -159,6 +159,9 @@ public abstract class Controller {
 			switch (actionMethodName) {
 			case "login":
 			case "join":
+			case "doFindLoginId":
+			case "doFindLoginPw":
+			case "findAccount":
 				needToLogout = true;
 				break;
 			}
