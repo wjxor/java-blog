@@ -1,6 +1,7 @@
 package com.sbs.java.blog.dao;
 
 import java.sql.Connection;
+import java.util.Map;
 
 import com.sbs.java.blog.dto.Member;
 import com.sbs.java.blog.util.DBUtil;
@@ -63,7 +64,13 @@ public class MemberDao extends Dao {
 		sql.append("FROM `member`");
 		sql.append("WHERE id = ?", id);
 
-		return new Member(DBUtil.selectRow(dbConn, sql));
+		Map<String, Object> row = DBUtil.selectRow(dbConn, sql);
+
+		if (row.isEmpty()) {
+			return null;
+		}
+
+		return new Member(row);
 	}
 
 	public void modify(int actorId, String loginPw) {
@@ -72,5 +79,20 @@ public class MemberDao extends Dao {
 		sql.append(", loginPw = ?", loginPw);
 		sql.append("WHERE id = ?", actorId);
 		DBUtil.update(dbConn, sql);
+	}
+
+	public Member getMemberByNameAndEmail(String name, String email) {
+		SecSql sql = SecSql.from("SELECT *");
+		sql.append("FROM `member`");
+		sql.append("WHERE name = ?", name);
+		sql.append("AND email = ?", email);
+
+		Map<String, Object> row = DBUtil.selectRow(dbConn, sql);
+
+		if (row.isEmpty()) {
+			return null;
+		}
+
+		return new Member(row);
 	}
 }
