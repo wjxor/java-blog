@@ -65,4 +65,12 @@ public class MemberDao extends Dao {
 
 		return new Member(DBUtil.selectRow(dbConn, sql));
 	}
+
+	public void modify(int actorId, String loginPw) {
+		SecSql sql = SecSql.from("UPDATE member");
+		sql.append("SET updateDate = NOW()");
+		sql.append(", loginPw = ?", loginPw);
+		sql.append("WHERE id = ?", actorId);
+		DBUtil.update(dbConn, sql);
+	}
 }

@@ -128,13 +128,15 @@ public class App {
 				req.getRequestDispatcher(viewPath).forward(req, resp);
 			} else if (actionResult.startsWith("html:")) {
 				resp.getWriter().append(actionResult.substring(5));
+			} else if (actionResult.startsWith("json:")) {
+				resp.setContentType("application/json");
+				resp.getWriter().append(actionResult.substring(5));
 			} else {
 				resp.getWriter().append("처리할 수 없는 액션결과입니다.");
 			}
 		} else {
 			resp.getWriter().append("존재하지 않는 페이지 입니다.");
 		}
-
 	}
 
 	private String getDbId() {

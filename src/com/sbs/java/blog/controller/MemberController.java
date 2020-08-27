@@ -1,10 +1,12 @@
 package com.sbs.java.blog.controller;
 
 import java.sql.Connection;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sbs.java.blog.dto.Member;
 import com.sbs.java.blog.util.Util;
 
 public class MemberController extends Controller {
@@ -26,9 +28,81 @@ public class MemberController extends Controller {
 			return actionDoLogin();
 		case "doLogout":
 			return actionDoLogout();
+		case "getLoginIdDup":
+			return actionGetLoginIdDup();
+		case "passwordForPrivate":
+			return actionPasswordForPrivate();
+		case "doPasswordForPrivate":
+			return actionDoPasswordForPrivate();
+		case "modifyPrivate":
+			return actionModifyPrivate();
+		case "doModifyPrivate":
+			return actionDoModifyPrivate();
 		}
 
 		return "";
+	}
+
+	private String actionDoModifyPrivate() {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		String authCode = req.getParameter("authCode");
+
+		if (memberService.isValidModifyPrivateAuthCode(loginedMemberId, authCode) == false) {
+			return String.format(
+					"html:<script> alert('비밀번호를 다시 체크해주세요.'); location.replace('../member/passwordForPrivate'); </script>");
+		}
+
+		String loginPw = req.getParameter("loginPwReal");
+
+		memberService.modify(loginedMemberId, loginPw);
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
+		loginedMember.setLoginPw(loginPw); // 크게 의미는 없지만, 의미론적인 면에서 해야 하는
+
+		return String.format("html:<script> alert('개인정보가 수정되었습니다.'); location.replace('../home/main'); </script>");
+	}
+
+	private String actionModifyPrivate() {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+
+		String authCode = req.getParameter("authCode");
+		if (memberService.isValidModifyPrivateAuthCode(loginedMemberId, authCode) == false) {
+			return String.format(
+					"html:<script> alert('비밀번호를 다시 체크해주세요.'); location.replace('../member/passwordForPrivate'); </script>");
+		}
+
+		return "member/modifyPrivate.jsp";
+	}
+
+	private String actionDoPasswordForPrivate() {
+		String loginPw = req.getParameter("loginPwReal");
+
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
+		int loginedMemberId = loginedMember.getId();
+
+		if (loginedMember.getLoginPw().equals(loginPw)) {
+			String authCode = memberService.genModifyPrivateAuthCode(loginedMemberId);
+
+			return String
+					.format("html:<script> location.replace('modifyPrivate?authCode=" + authCode + "'); </script>");
+		}
+
+		return String.format("html:<script> alert('비밀번호를 다시 입력해주세요.'); history.back(); </script>");
+	}
+
+	private String actionPasswordForPrivate() {
+		return "member/passwordForPrivate.jsp";
+	}
+
+	private String actionGetLoginIdDup() {
+		String loginId = req.getParameter("loginId");
+
+		boolean isJoinableLoginId = memberService.isJoinableLoginId(loginId);
+
+		if (isJoinableLoginId) {
+			return "json:{\"msg\":\"사용할 수 있는 아이디 입니다.\", \"resultCode\": \"S-1\", \"loginId\":\"" + loginId + "\"}";
+		} else {
+			return "json:{\"msg\":\"사용할 수 없는 아이디 입니다.\", \"resultCode\": \"F-1\", \"loginId\":\"" + loginId + "\"}";
+		}
 	}
 
 	private String actionDoLogin() {
