@@ -98,7 +98,7 @@
 			class="fas fa-bars"></i> <i class="fas fa-times"></i>
 		</a> <a href="${pageContext.request.contextPath}/s/home/main"
 			class="logo absolute-center absolute-middle flex flex-ai-c"> <i
-			class="fas fa-award"></i>
+			class="fas fa-mobile-alt"></i>
 		</a>
 	</div>
 	<div class="mobile-side-bar flex flex-ai-c visible-on-sm-down">
@@ -150,7 +150,7 @@
 	<div class="top-bar visible-on-md-up">
 		<div class="con flex flex-jc-sb height-100p">
 			<a href="${pageContext.request.contextPath}/s/home/main"
-				class="logo flex flex-ai-c"> <i class="fas fa-award"></i>
+				class="logo flex flex-ai-c"> <i class="fas fa-blog"></i>
 			</a>
 
 			<nav class="menu-box-1">
