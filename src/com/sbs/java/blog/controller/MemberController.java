@@ -1,7 +1,6 @@
 package com.sbs.java.blog.controller;
 
 import java.sql.Connection;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,8 +49,22 @@ public class MemberController extends Controller {
 	}
 
 	private String actionDoFindLoginPw() {
-		// TODO Auto-generated method stub
-		return null;
+		String loginId = Util.getString(req, "loginId");
+		String email = Util.getString(req, "email");
+
+		Member member = memberService.getMemberByLoginId(loginId);
+
+		if (member == null || member.getEmail().equals(email) == false) {
+			req.setAttribute("jsAlertMsg", "일치하는 회원이 없습니다.");
+			req.setAttribute("jsHistoryBack", true);
+			return "common/data.jsp";
+		}
+
+		memberService.notifyTempLoginPw(member);
+		req.setAttribute("jsAlertMsg", "메일로 임시패스워드가 발송되었습니다.");
+		req.setAttribute("redirectUri", "../member/login");
+
+		return "common/data.jsp";
 	}
 
 	private String actionDoFindLoginId() {
@@ -148,10 +161,18 @@ public class MemberController extends Controller {
 		}
 
 		session.setAttribute("loginedMemberId", loginedMemberId);
+		boolean isNeedToChangePasswordForTemp = memberService.isNeedToChangePasswordForTemp(loginedMemberId);
 
 		String redirectUri = Util.getString(req, "redirectUri", "../home/main");
 
-		return String.format("html:<script> alert('로그인 되었습니다.'); location.replace('" + redirectUri + "'); </script>");
+		req.setAttribute("jsAlertMsg", "로그인 되었습니다.");
+
+		if (isNeedToChangePasswordForTemp) {
+			req.setAttribute("jsAlertMsg2", "현재 임시패스워드를 사용중입니다. 비밀번호를 변경해주세요.");
+		}
+
+		req.setAttribute("redirectUri", redirectUri);
+		return "common/data.jsp";
 	}
 
 	private String actionLogin() {

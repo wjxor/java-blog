@@ -6,6 +6,11 @@
 		alert('${jsAlertMsg}');
 	</script>
 </c:if>
+<c:if test="${jsAlertMsg2 != null}">
+	<script>
+		alert('${jsAlertMsg2}');
+	</script>
+</c:if>
 <c:if test="${jsHistoryBack}">
 	<script>
 		history.back();
@@ -21,8 +26,8 @@
 		location.href = '${jsLocationHref}';
 	</script>
 </c:if>
-<c:if test="${redirectUrl != null}">
+<c:if test="${redirectUri != null}">
 	<script>
-		location.replace('${redirectUrl}');
+		location.replace('${redirectUri}');
 	</script>
 </c:if>
