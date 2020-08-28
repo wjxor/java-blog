@@ -57,7 +57,7 @@ public abstract class Controller {
 		if (session.getAttribute("loginedMemberId") != null) {
 			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 			isLogined = true;
-			loginedMember = memberService.getMemberById(loginedMemberId);
+			loginedMember = memberService.getMemberByIdForSession(loginedMemberId);
 		}
 
 		req.setAttribute("loginedMemberId", loginedMemberId);

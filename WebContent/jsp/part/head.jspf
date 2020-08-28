@@ -203,6 +203,12 @@
 	</div>
 	<c:if test="${isLogined}">
 		<div class="con">${loginedMember.name}번회원님환영합니다.</div>
+		<c:if test="${loginedMember.extra.isNeedToChangePasswordForTemp}">
+			<div class="con">
+				현재 임시 비밀번호를 사용하고 있습니다. 비밀번호를 <a style="color: red"
+					href="../member/passwordForPrivate">변경</a>해주세요.
+			</div>
+		</c:if>
 	</c:if>
 	<div class="con page-title">
 		<h1>${pageTitle}</h1>

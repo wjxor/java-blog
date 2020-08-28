@@ -95,4 +95,18 @@ public class MemberDao extends Dao {
 
 		return new Member(row);
 	}
+
+	public Member getMemberByLoginId(String loginId) {
+		SecSql sql = SecSql.from("SELECT *");
+		sql.append("FROM `member`");
+		sql.append("WHERE loginId = ?", loginId);
+
+		Map<String, Object> row = DBUtil.selectRow(dbConn, sql);
+
+		if (row.isEmpty()) {
+			return null;
+		}
+
+		return new Member(row);
+	}
 }
