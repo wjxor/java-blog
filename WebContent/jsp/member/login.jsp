@@ -1,15 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <c:set var="pageTitle" value="로그인"></c:set>
 <%@ include file="/jsp/part/head.jspf"%>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 
 <style>
 /* cus */
 .login-form-box {
-	margin-top: 30px;
+    margin-top: 30px;
 }
 </style>
 
@@ -34,30 +32,30 @@
 </script>
 
 <div class="login-form-box con">
-	<form action="doLogin" method="POST" class="login-form form1"
-		onsubmit="submitLoginForm(this); return false;">
-		<input type="hidden" name="redirectUri"
-			value="${param.afterLoginRedirectUri}" /> <input type="hidden"
-			name="loginPwReal" />
-		<div class="form-row">
-			<div class="label">로그인 아이디</div>
-			<div class="input">
-				<input name="loginId" type="text" placeholder="로그인 아이디를 입력해주세요." />
-			</div>
-		</div>
-		<div class="form-row">
-			<div class="label">로그인 비번</div>
-			<div class="input">
-				<input name="loginPw" type="password" placeholder="로그인 비번을 입력해주세요." />
-			</div>
-		</div>
-		<div class="form-row">
-			<div class="label">전송</div>
-			<div class="input">
-				<input type="submit" value="전송" /> <a href="../home/main">취소</a>
-			</div>
-		</div>
-	</form>
+    <form action="doLogin" method="POST" class="login-form form1" onsubmit="submitLoginForm(this); return false;">
+        <input type="hidden" name="redirectUri" value="${param.afterLoginRedirectUri}" />
+        <input type="hidden" name="loginPwReal" />
+        <div class="form-row">
+            <div class="label">로그인 아이디</div>
+            <div class="input">
+                <input name="loginId" type="text" placeholder="로그인 아이디를 입력해주세요." />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="label">로그인 비번</div>
+            <div class="input">
+                <input name="loginPw" type="password" placeholder="로그인 비번을 입력해주세요." />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="label">전송</div>
+            <div class="input">
+                <input type="submit" value="전송" />
+                <a href="../home/main">돌아가기</a>
+                <a href="../member/findAccount">계정찾기</a>
+            </div>
+        </div>
+    </form>
 </div>
 
 <%@ include file="/jsp/part/foot.jspf"%>
