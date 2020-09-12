@@ -2,9 +2,9 @@
 SET NAMES utf8mb4;
 
 # DB 생성
-DROP DATABASE IF EXISTS site41;
-CREATE DATABASE site41;
-USE site41;
+DROP DATABASE IF EXISTS test;
+CREATE DATABASE test;
+USE test;
 
 # 카테고리 테이블 생성
 DROP TABLE IF EXISTS cateItem;

@@ -26,7 +26,8 @@ public class MemberService extends Service {
 	public int join(String loginId, String loginPw, String name, String nickname, String email) {
 		int id = memberDao.join(loginId, loginPw, name, nickname, email);
 
-		mailService.send(email, "가입을 환영합니다.", "<a href=\"https://hs.my.iu.gy/\" target=\"_blank\">사이트로 이동</a>");
+		mailService.send(email, "가입을 환영합니다.",
+				"<a href=\"https://ksh.blog.coding.family/\" target=\"_blank\">사이트로 이동</a>");
 
 		return id;
 	}

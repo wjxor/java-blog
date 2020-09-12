@@ -7,6 +7,6 @@ public class Config {
 	public static String gmailPw;
 
 	public static String getSiteName() {
-		return "hs.my.iu.gy";
+		return "ksh.blog.coding.family";
 	}
 }
