@@ -21,10 +21,17 @@ import com.sbs.java.blog.util.Util;
 public class App {
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
+	private boolean isDevelServer = true;
 
 	public App(HttpServletRequest req, HttpServletResponse resp) {
 		this.req = req;
 		this.resp = resp;
+
+		String profilesActive = System.getProperty("spring.profiles.active");
+
+		if (profilesActive != null && profilesActive.equals("production")) {
+			isDevelServer = false;
+		}
 	}
 
 	private void loadDbDriver() throws IOException {
@@ -42,7 +49,10 @@ public class App {
 	}
 
 	private String getDbUri() {
-		return "jdbc:mysql://localhost:3306/BD?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull";
+		if (isDevelServer) {
+			return "jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull";
+		}
+		return "jdbc:mysql://ksh.blog.coding.family:3306/blog_db?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull";
 	}
 
 	public void start() throws ServletException, IOException {
@@ -144,6 +154,9 @@ public class App {
 	}
 
 	private String getDbPassword() {
+		if (isDevelServer) {
+			return "";
+		}
 		return "";
 	}
 
