@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.Attr;
+import com.sbs.java.blog.util.Util;
 
 public class TestController extends Controller {
 	public TestController(Connection dbConn, String actionMethodName, HttpServletRequest req,
@@ -50,8 +51,13 @@ public class TestController extends Controller {
 	}
 
 	private String actionSendMail() {
-		mailService.send("removed@example.com", "안녕하세요.!!!",
-				"<a href=\"https://www.naver.com\" target=\"_blank\">네이버!!!</a>반가워요 ^ ^");
+		String to = Util.getString(req, "to", "");
+
+		if (to.length() == 0) {
+			return "html:to(수신자 이메일)를 입력해주세요.";
+		}
+
+		mailService.send(to, "테스트 메일 입니다.", "<div>테스트 메일 입니다.</div>");
 		return "html:성공";
 	}
 
