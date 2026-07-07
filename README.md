@@ -270,7 +270,15 @@ sql.append("LIMIT ?, ?", limitFrom, itemsInAPage);
    | `BLOG_DB_ID` | DB 계정 아이디 | `blog_user` |
    | `BLOG_DB_PW` | DB 계정 비밀번호 | `********` |
 
-3. **메일 설정** — `WebContent/WEB-INF/web.xml.sample`을 `web.xml`로 복사 후 Gmail **앱 비밀번호** 입력
+3. **메일 설정** — 환경변수로 지정 (환경변수가 없으면 `web.xml`의 context-param 사용. `WebContent/WEB-INF/web.xml.sample` 참고)
+
+   | 환경변수 | 설명 | 예시 |
+   |---|---|---|
+   | `BLOG_GMAIL_ID` | 발송용 Gmail 주소 | `example@gmail.com` |
+   | `BLOG_GMAIL_PW` | Gmail **앱 비밀번호** | `********` |
+   | `BLOG_MAIL_FROM` | 발신자 표시 주소 (선택) | `no-reply@no-reply.com` |
+   | `BLOG_MAIL_FROM_NAME` | 발신자 표시 이름 (선택) | `관리자` |
+
 4. **배포** — Eclipse/IntelliJ에서 Tomcat 서버에 프로젝트를 올려 실행 (Tomcat 실행 환경에 위 환경변수 등록)
 5. **접속** — `http://localhost:8080/{컨텍스트경로}/s/home/main`
 

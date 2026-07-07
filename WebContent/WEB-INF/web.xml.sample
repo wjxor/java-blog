@@ -4,6 +4,12 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
 	id="WebApp_ID" version="4.0">
 
+	<!-- 환경변수(BLOG_GMAIL_ID, BLOG_GMAIL_PW 등)가 설정되어 있으면 환경변수가 우선 적용됩니다. -->
+	<context-param>
+		<param-name>gmailId</param-name>
+		<param-value>지메일 주소</param-value>
+	</context-param>
+
 	<context-param>
 		<param-name>gmailPw</param-name>
 		<param-value>앱 비밀번호</param-value>

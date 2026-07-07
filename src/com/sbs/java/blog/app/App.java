@@ -34,6 +34,22 @@ public class App {
 		}
 	}
 
+	private String getSettingValue(String envName, String contextParamName, String defaultValue) {
+		String value = System.getenv(envName);
+
+		if (value != null && value.trim().length() > 0) {
+			return value;
+		}
+
+		value = req.getServletContext().getInitParameter(contextParamName);
+
+		if (value != null && value.trim().length() > 0) {
+			return value;
+		}
+
+		return defaultValue;
+	}
+
 	private void loadDbDriver() throws IOException {
 		// DB 커넥터 로딩 시작
 		String driverName = "com.mysql.cj.jdbc.Driver";
@@ -63,14 +79,11 @@ public class App {
 
 	public void start() throws ServletException, IOException {
 		// Config 구성
-
-		if (req.getServletContext().getInitParameter("gmailId") != null) {
-			Config.gmailId = (String) req.getServletContext().getInitParameter("gmailId");
-		}
-
-		if (req.getServletContext().getInitParameter("gmailPw") != null) {
-			Config.gmailPw = (String) req.getServletContext().getInitParameter("gmailPw");
-		}
+		// 환경변수 우선, 없으면 web.xml의 context-param, 그것도 없으면 기존 값 유지
+		Config.gmailId = getSettingValue("BLOG_GMAIL_ID", "gmailId", Config.gmailId);
+		Config.gmailPw = getSettingValue("BLOG_GMAIL_PW", "gmailPw", Config.gmailPw);
+		Config.mailFrom = getSettingValue("BLOG_MAIL_FROM", "mailFrom", Config.mailFrom);
+		Config.mailFromName = getSettingValue("BLOG_MAIL_FROM_NAME", "mailFromName", Config.mailFromName);
 
 		// DB 드라이버 로딩
 		loadDbDriver();
