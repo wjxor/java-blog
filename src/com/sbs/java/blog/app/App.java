@@ -64,6 +64,8 @@ public class App {
 		// DB 커넥터 로딩 성공
 	}
 
+	// [설정 방법] DB 접속정보는 환경변수 BLOG_DB_URI, BLOG_DB_ID, BLOG_DB_PW 로 설정한다.
+	// 환경변수가 없으면 아래 기본값(로컬 MySQL의 test DB, root 계정, 빈 비밀번호)을 사용한다.
 	private String getDbUri() {
 		String dbUri = System.getenv("BLOG_DB_URI");
 

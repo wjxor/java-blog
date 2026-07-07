@@ -261,6 +261,16 @@ sql.append("LIMIT ?, ?", limitFrom, itemsInAPage);
 
 ## 🚀 실행 방법
 
+### ⚙️ 설정 체크리스트 — 어디를 수정해야 하나요?
+
+| 항목 | 필수 | 설정 방법 | 관련 코드 |
+|---|---|---|---|
+| DB 접속정보 | 로컬 기본값과 다를 때만 | 환경변수 `BLOG_DB_URI` / `BLOG_DB_ID` / `BLOG_DB_PW` | `App.java`의 `getDbUri()` 주석 참고 |
+| Gmail 계정 (메일 발송용) | 메일 기능 쓸 때만 | 환경변수 `BLOG_GMAIL_ID` / `BLOG_GMAIL_PW` **또는** `web.xml.sample`을 `web.xml`로 복사 후 입력 | `Config.java` 상단 주석 참고 |
+| 발신자 표시 주소/이름 | 선택 | 환경변수 `BLOG_MAIL_FROM` / `BLOG_MAIL_FROM_NAME` | `Config.java` 기본값 사용 가능 |
+
+> 💡 아무것도 설정하지 않아도 **로컬 MySQL(`localhost:3306/test`, `root`, 빈 비밀번호)** 기준으로 바로 실행됩니다. 이 경우 메일 발송 기능(가입 환영 메일, 임시 비밀번호)만 동작하지 않습니다.
+
 1. **DB 준비** — MySQL에서 `db.sql`을 순서대로 실행 (기본 DB명: `test`, 기본 계정: `admin`/`admin`)
 2. **DB 접속정보 설정** — 환경변수로 지정 (미지정 시 개발용 기본값 `localhost` / `root` / 빈 비밀번호 사용)
 
