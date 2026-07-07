@@ -3,8 +3,10 @@ package com.sbs.java.blog.dto;
 import java.util.Map;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class ArticleReply extends Dto {
 	private int articleId;
 	private int memberId;

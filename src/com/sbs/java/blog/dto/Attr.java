@@ -3,8 +3,10 @@ package com.sbs.java.blog.dto;
 import java.util.Map;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class Attr extends Dto {
 	private String name;
 	private String value;
