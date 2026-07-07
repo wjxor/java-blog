@@ -49,6 +49,12 @@ public class App {
 	}
 
 	private String getDbUri() {
+		String dbUri = System.getenv("BLOG_DB_URI");
+
+		if (dbUri != null && dbUri.trim().length() > 0) {
+			return dbUri;
+		}
+
 		if (isDevelServer) {
 			return "jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull";
 		}
@@ -150,13 +156,22 @@ public class App {
 	}
 
 	private String getDbId() {
+		String dbId = System.getenv("BLOG_DB_ID");
+
+		if (dbId != null && dbId.trim().length() > 0) {
+			return dbId;
+		}
+
 		return "root";
 	}
 
 	private String getDbPassword() {
-		if (isDevelServer) {
-			return "";
+		String dbPw = System.getenv("BLOG_DB_PW");
+
+		if (dbPw != null) {
+			return dbPw;
 		}
+
 		return "";
 	}
 

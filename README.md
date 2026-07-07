@@ -262,8 +262,16 @@ sql.append("LIMIT ?, ?", limitFrom, itemsInAPage);
 ## 🚀 실행 방법
 
 1. **DB 준비** — MySQL에서 `db.sql`을 순서대로 실행 (기본 DB명: `test`, 기본 계정: `admin`/`admin`)
-2. **메일 설정** — `WebContent/WEB-INF/web.xml.sample`을 `web.xml`로 복사 후 Gmail **앱 비밀번호** 입력
-3. **배포** — Eclipse/IntelliJ에서 Tomcat 서버에 프로젝트를 올려 실행
-4. **접속** — `http://localhost:8080/{컨텍스트경로}/s/home/main`
+2. **DB 접속정보 설정** — 환경변수로 지정 (미지정 시 개발용 기본값 `localhost` / `root` / 빈 비밀번호 사용)
+
+   | 환경변수 | 설명 | 예시 |
+   |---|---|---|
+   | `BLOG_DB_URI` | JDBC 접속 URI | `jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul` |
+   | `BLOG_DB_ID` | DB 계정 아이디 | `blog_user` |
+   | `BLOG_DB_PW` | DB 계정 비밀번호 | `********` |
+
+3. **메일 설정** — `WebContent/WEB-INF/web.xml.sample`을 `web.xml`로 복사 후 Gmail **앱 비밀번호** 입력
+4. **배포** — Eclipse/IntelliJ에서 Tomcat 서버에 프로젝트를 올려 실행 (Tomcat 실행 환경에 위 환경변수 등록)
+5. **접속** — `http://localhost:8080/{컨텍스트경로}/s/home/main`
 
 > 💡 운영 서버는 JVM 옵션 `-Dspring.profiles.active=production` 지정 시 운영 DB(`blog_db`)로 자동 전환됩니다.
